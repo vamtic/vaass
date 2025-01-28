@@ -1,0 +1,23 @@
+{
+	"name": "@tycrek/yaass",
+	"license": "ISC",
+	"version": "0.0.0",
+	"exports": "./src/yaass.ts",
+	"tasks": {},
+	"imports": {},
+	"fmt": {
+		"useTabs": true,
+		"indentWidth": 4,
+		"semiColons": true,
+		"singleQuote": true,
+		"lineWidth": 120,
+		"exclude": [
+			"README.md"
+		]
+	},
+	"exclude": [
+		".gitignore",
+		".vscode/"
+	],
+	"lock": false
+}

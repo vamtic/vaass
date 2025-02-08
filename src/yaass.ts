@@ -1,12 +1,17 @@
 import { Hono } from '@hono/hono';
-import { Database } from '@db/sqlite';
-import { ensureDirSync } from '@std/fs';
+import { init as initDatabase } from './db.ts';
+import { log } from './utils.ts';
 
-ensureDirSync('data');
+// Initialize database
+await initDatabase();
 
+// Set up Hono
 const app = new Hono();
-const db = new Database('data/yaass.db');
 
 app.get('/', (c) => c.text('Hello Deno!'));
 
-Deno.serve({ port: 6969 }, app.fetch);
+Deno.serve({
+	port: 6969,
+	handler: app.fetch,
+	onListen: ({ port, hostname }) => log.info(`server started: http://${hostname}:${port}`),
+});

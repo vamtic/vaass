@@ -2,8 +2,8 @@ import { init as initDatabase } from './db.ts';
 import { log } from './utils.ts';
 import handler from './web.ts';
 
-// Initialize database
-await initDatabase();
+log.info(`starting...`);
+initDatabase();
 
 // Host Deno server
 Deno.serve({

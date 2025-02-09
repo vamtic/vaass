@@ -1,0 +1,9 @@
+services:
+  yaass:
+    build: .
+    container_name: yaass-docker
+    restart: unless-stopped
+    volumes:
+      - ./data:/yaass/data
+    ports:
+      - '6969:6969'

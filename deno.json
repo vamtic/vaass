@@ -26,7 +26,8 @@
 	},
 	"exclude": [
 		".gitignore",
-		".vscode/"
+		".vscode/",
+		"compose.yml"
 	],
 	"lock": false
 }

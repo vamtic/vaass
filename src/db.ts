@@ -58,9 +58,9 @@ export const DB = {
 			image.uploader_uid,
 		),
 
-	getUpload: (via: 'uid' | 'sid', needle: string) =>
-		database.prepare(`SELECT * FROM uploads WHERE ${via} = ?;`).get<Upload>(needle),
+	getUpload: (needle: string) =>
+		database.prepare(`SELECT * FROM uploads WHERE uid = ? OR sid = ?;`).get<Upload>(needle, needle),
 
-	getUploads: (via: 'uploader_uid' | 'filehash', needle: string) =>
-		database.prepare(`SELECT * FROM uploads WHERE ${via} = ?;`).all<Upload>(needle),
+	getUploads: (needle: string) =>
+		database.prepare(`SELECT * FROM uploads WHERE uploader_uid = ? OR filehash = ?;`).all<Upload>(needle, needle),
 };

@@ -1,6 +1,7 @@
 import { Hono } from '@hono/hono';
 import { crypto } from '@std/crypto';
 import { encodeHex as hex } from '@std/encoding/hex';
+import { monotonicUlid as ulid } from '@std/ulid';
 import { generateRandomString, join, log, WHO_AM_I } from './utils.ts';
 import { DB } from './db.ts';
 import type { Upload } from './types/Upload.ts';
@@ -21,7 +22,7 @@ app.post('/upload', async (ctx) => {
 	const file = body.get('file') as File;
 
 	// File details
-	const uid = hex(await crypto.subtle.digest('BLAKE3', new TextEncoder().encode(file.name + file.lastModified)));
+	const uid = ulid();
 	const nameOnDisk = `${uid}.${file.name.includes('.') ? file.name.split('.').pop() : 'unknown'}`;
 	const location = 'data/uploads/' + nameOnDisk;
 	const stream = file.stream();
@@ -42,7 +43,7 @@ app.post('/upload', async (ctx) => {
 		uploader_uid: '',
 	};
 	DB.putUpload(upload);
-	log.info(`uploaded: ${upload.sid} (${upload.type} ${upload.filename})`);
+	log.info(`uploaded: ${upload.sid} (${upload.type} ${upload.filename}) [${uid}]`);
 
 	return ctx.json({ sid: upload.sid });
 });
@@ -52,7 +53,7 @@ app.get('/:needle/:disposition?', async (ctx) => {
 	const needle = ctx.req.param('needle');
 	const disposition = ctx.req.param('disposition') as 'download' | undefined;
 
-	const upload = DB.getUpload('sid', needle);
+	const upload = DB.getUpload(needle);
 	if (!upload) {
 		ctx.status(404);
 		return ctx.text('not found');

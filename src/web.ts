@@ -23,11 +23,11 @@ app.post('/upload', async (ctx) => {
 	// File details
 	const uid = hex(await crypto.subtle.digest('BLAKE3', new TextEncoder().encode(file.name + file.lastModified)));
 	const nameOnDisk = `${uid}.${file.name.includes('.') ? file.name.split('.').pop() : 'unknown'}`;
-	const location = join('data/uploads', nameOnDisk);
+	const location = 'data/uploads/' + nameOnDisk;
 	const stream = file.stream();
 
 	// Save file to disk
-	await Deno.writeFile(location, stream);
+	await Deno.writeFile(join(location), stream);
 
 	// Save details to database
 	const upload: Upload = {

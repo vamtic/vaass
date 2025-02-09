@@ -1,6 +1,6 @@
 <div align="center">
 
-# YAASS
+# yaass
 
 *Yet Another A ShareX Server*
 
@@ -8,4 +8,16 @@
 
 ## How to use
 
-Install [Deno](https://deno.com/). the rest is WIP
+yaass is simple: Install either [Deno](https://deno.com/) or [Docker Compose](https://docs.docker.com/compose/).
+
+```bash
+# Download this project
+git clone https://github.com/tycrek/yaass.git
+cd yaass/
+
+# If you chose Deno:
+deno task start
+
+# Or you chose Docker:
+docker compose up
+```

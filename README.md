@@ -21,3 +21,25 @@ deno task start
 # Or you chose Docker:
 docker compose up
 ```
+
+### Configure ShareX
+
+Add a new **Custom uploader** and conigure it as shown:
+
+| Option | Value |
+| --- | --- |
+| Method | POST |
+| Request URL | `https://<your.domain>/upload` |
+| Body | Form data (multipart/form-data) |
+| File form name | file |
+| URL | `http://<your.domain>/{json:.sid}` |
+
+*This is subject to change as project development continues.*
+
+## What next?
+
+More features are coming soon.
+
+- Multi-user support
+- Dashboards for both users & admins
+- *as well as most features previously in [ass](https://github.com/tycrek/ass)*

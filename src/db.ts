@@ -1,17 +1,19 @@
 import { ensureDir } from '@std/fs';
 import { Database } from '@db/sqlite';
 import { log } from './utils.ts';
+import type { Upload } from './types/Upload.ts';
 
 // Prepare database on filesystem
 await ensureDir('data/uploads');
 const database = new Database('data/yaass.db');
 
-export function init() {
-	const [version] = database.prepare('select sqlite_version();').value<[string]>()!;
+export const DB = {
+	init: () => {
+		const [version] = database.prepare('select sqlite_version();').value<[string]>()!;
 
-	// Create users table
-	database.prepare(
-		`CREATE TABLE IF NOT EXISTS users (
+		// Create users table
+		database.prepare(
+			`CREATE TABLE IF NOT EXISTS users (
 			_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			uid TEXT,
 			name TEXT,
@@ -19,25 +21,46 @@ export function init() {
 			passhash TEXT,
 			meta TEXT
 		);`,
-	).run();
+		).run();
 
-	// Create uploads table
-	database.prepare(
-		`CREATE TABLE IF NOT EXISTS uploads (
+		// Create uploads table
+		database.prepare(
+			`CREATE TABLE IF NOT EXISTS uploads (
 			_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			uid TEXT,
 			sid TEXT,
 			filename TEXT,
-			timestamp TEXT,
-			filehash TEXT,
+			location TEXT,
+			timestamp NUMBER,
+			hash TEXT,
+			type TEXT,
+			size NUMBER,
 			uploader_uid TEXT
 		);`,
-	).run();
+		).run();
 
-	log.info(`using sqlite ${version}`);
-	return;
-}
+		log.info(`using sqlite ${version}`);
+		return;
+	},
 
-export function get() {}
+	putUpload: (image: Upload) =>
+		database.prepare(`
+			INSERT INTO uploads (uid, sid, filename, location, timestamp, hash, type, size, uploader_uid)
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`).run(
+			image.uid,
+			image.sid,
+			image.filename,
+			image.location,
+			image.timestamp,
+			image.hash,
+			image.type,
+			image.size,
+			image.uploader_uid,
+		),
 
-export function put() {}
+	getUpload: (via: 'uid' | 'sid', needle: string) =>
+		database.prepare(`SELECT * FROM uploads WHERE ${via} = ?;`).get<Upload>(needle),
+
+	getUploads: (via: 'uploader_uid' | 'filehash', needle: string) =>
+		database.prepare(`SELECT * FROM uploads WHERE ${via} = ?;`).all<Upload>(needle),
+};

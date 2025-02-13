@@ -6,9 +6,9 @@ import { generateRandomString, join, log } from '../../src/utils.ts';
 import { DB } from '../../src/db.ts';
 import type { Upload } from '../../src/types/Upload.ts';
 
-const app = new Hono();
+const route = new Hono();
 
-app.post('/', async (ctx) => {
+route.post('/', async (ctx) => {
 	const body = await ctx.req.formData();
 
 	if (!body.has('file')) {
@@ -46,4 +46,4 @@ app.post('/', async (ctx) => {
 	return ctx.json({ sid: upload.sid });
 });
 
-export default app;
+export default route;

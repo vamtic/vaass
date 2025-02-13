@@ -1,9 +1,9 @@
 import { Hono } from '@hono/hono';
 import { DB } from '../../src/db.ts';
 
-const app = new Hono();
+const route = new Hono();
 
-app.get('/:needle/:disposition?', async (ctx) => {
+route.get('/:needle/:disposition?', async (ctx) => {
 	const needle = ctx.req.param('needle');
 	const disposition = ctx.req.param('disposition') as 'download' | undefined;
 
@@ -22,4 +22,4 @@ app.get('/:needle/:disposition?', async (ctx) => {
 	return ctx.body((await Deno.readFile(upload.location)).buffer);
 });
 
-export default app;
+export default route;

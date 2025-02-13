@@ -41,7 +41,7 @@ route.post('/', async (ctx) => {
 		uploader_uid: '',
 	};
 	DB.putUpload(upload);
-	log.info(`uploaded: ${upload.sid} (${upload.type} ${upload.filename}) [${uid}]`);
+	log.info(`uploaded: ${upload.sid} [${upload.type}] [${upload.filename}] [${uid}]`);
 
 	return ctx.json({ sid: upload.sid });
 });

@@ -1,6 +1,6 @@
 import { DB } from './db.ts';
 import { log } from './utils.ts';
-import handler from './web.ts';
+import handler from '../web/server.ts';
 
 log.info(`starting...`);
 DB.init();

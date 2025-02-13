@@ -2,15 +2,13 @@ import { Hono } from '@hono/hono';
 import { crypto } from '@std/crypto';
 import { encodeHex as hex } from '@std/encoding/hex';
 import { monotonicUlid as ulid } from '@std/ulid';
-import { generateRandomString, join, log, WHO_AM_I } from './utils.ts';
-import { DB } from './db.ts';
-import type { Upload } from './types/Upload.ts';
+import { generateRandomString, join, log } from '../../src/utils.ts';
+import { DB } from '../../src/db.ts';
+import type { Upload } from '../../src/types/Upload.ts';
 
-// Set up Hono
 const app = new Hono();
 
-// File upload
-app.post('/upload', async (ctx) => {
+app.post('/', async (ctx) => {
 	const body = await ctx.req.formData();
 
 	if (!body.has('file')) {
@@ -48,27 +46,4 @@ app.post('/upload', async (ctx) => {
 	return ctx.json({ sid: upload.sid });
 });
 
-// Uploads lookup
-app.get('/:needle/:disposition?', async (ctx) => {
-	const needle = ctx.req.param('needle');
-	const disposition = ctx.req.param('disposition') as 'download' | undefined;
-
-	const upload = DB.getUpload(needle);
-	if (!upload) {
-		ctx.status(404);
-		return ctx.text('not found');
-	}
-
-	ctx.header('Content-Length', `${upload.size}`);
-	ctx.header('Content-Type', upload.type);
-	ctx.header(
-		'Content-Disposition',
-		`${disposition == 'download' ? 'attachment' : 'inline'}; filename=${upload.filename}`,
-	);
-	return ctx.body((await Deno.readFile(upload.location)).buffer);
-});
-
-// Default index
-app.get('/', (ctx) => ctx.text(WHO_AM_I));
-
-export default app.fetch;
+export default app;

@@ -1,8 +1,8 @@
 import { DB } from './db.ts';
-import { log } from './utils.ts';
+import { isDocker, log } from './utils.ts';
 import handler from '../web/server.ts';
 
-log.info(`starting...`);
+log.info(`starting... [${Deno.hostname()}] [${isDocker ? 'container' : 'native'}]`);
 DB.init();
 
 // Host Deno server

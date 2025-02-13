@@ -1,6 +1,7 @@
 import Log from './Log.ts';
 import pkg from '../deno.json' with { type: 'json' };
 import * as path from '@std/path';
+import { exists } from '@std/fs';
 
 export const WHO_AM_I = `${pkg.name.split('/')[1]} v${pkg.version}`;
 
@@ -8,6 +9,11 @@ export const WHO_AM_I = `${pkg.name.split('/')[1]} v${pkg.version}`;
  * Logger
  */
 export const log = new Log(`${WHO_AM_I} |`);
+
+/**
+ * Are we in a Docker container?
+ */
+export const isDocker = await exists('/.dockerenv');
 
 /**
  * Path joiner

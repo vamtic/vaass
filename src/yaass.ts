@@ -1,6 +1,6 @@
 import { DB } from './db.ts';
 import { isDocker, log } from './utils.ts';
-import handler from '../web/server.ts';
+import handler from './web/server.ts';
 
 log.info(`starting... [${Deno.hostname()}] [${isDocker ? 'container' : 'native'}]`);
 DB.init();

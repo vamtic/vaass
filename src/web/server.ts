@@ -1,8 +1,8 @@
 import { Hono } from '@hono/hono';
-import { WHO_AM_I } from '../src/utils.ts';
+import { WHO_AM_I } from '../utils.ts';
 // routes
 import upload from './routes/upload.ts';
-import needle from './routes/needle.ts';
+import needle from './routes/needle.tsx';
 
 const app = new Hono();
 

@@ -41,9 +41,10 @@ route.post('/', async (ctx) => {
 		uploader_uid: '',
 	};
 	DB.putUpload(upload);
+
 	log.info(`uploaded: ${upload.sid} [${upload.type}] [${upload.filename}] [${uid}]`);
 
-	return ctx.json({ sid: upload.sid });
+	return ctx.json({ url: `${ctx.get('domain')}/${upload.sid}` });
 });
 
 export default route;

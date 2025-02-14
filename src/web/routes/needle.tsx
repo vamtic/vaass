@@ -3,9 +3,9 @@ import { DB } from '../../db.ts';
 
 export const route = new Hono();
 
-route.use('/', async (ctx, next) => {
-	ctx.setRenderer(({ upload }) => {
-		return ctx.html(
+route.use('/*', (ctx, next) => (
+	ctx.setRenderer(({ upload }) =>
+		ctx.html(
 			<html>
 				<head>
 					<title>{upload.filename}</title>
@@ -16,10 +16,9 @@ route.use('/', async (ctx, next) => {
 					<img src={`${ctx.get('domain')}/${upload.sid}/inline`}></img>
 				</body>
 			</html>,
-		);
-	});
-	await next();
-});
+		)
+	), next()
+));
 
 route.get('/:needle/:disposition?', async (ctx) => {
 	const needle = ctx.req.param('needle');

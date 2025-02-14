@@ -3,9 +3,11 @@ import { DB } from '../../db.ts';
 
 export const route = new Hono();
 
-route.use('/*', (ctx, next) => (
-	ctx.setRenderer(({ upload }) =>
-		ctx.html(
+route.use('/*', async (ctx, next) => {
+	ctx.setRenderer(({ upload }) => {
+		const src = `${ctx.get('domain')}/${upload.sid}/inline`;
+		const element = upload.type.includes('video') ? <video controls src={src}></video> : <img src={src}></img>;
+		return ctx.html(
 			<html>
 				<head>
 					<title>{upload.filename}</title>
@@ -13,12 +15,13 @@ route.use('/*', (ctx, next) => (
 				<body>
 					<h1>{upload.filename}</h1>
 					<p>[{upload.type}]</p>
-					<img src={`${ctx.get('domain')}/${upload.sid}/inline`}></img>
+					{element}
 				</body>
 			</html>,
-		)
-	), next()
-));
+		);
+	});
+	await next();
+});
 
 route.get('/:needle/:disposition?', async (ctx) => {
 	const needle = ctx.req.param('needle');

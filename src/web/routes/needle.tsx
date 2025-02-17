@@ -7,9 +7,12 @@ const route = new Hono();
 route.use('/*', async (ctx, next) => {
 	ctx.setRenderer(({ upload }) => {
 		const src = `${ctx.get('domain')}/${upload.sid}/inline`;
-		const element = upload.type.includes('video')
-			? <video class='media' controls src={src}></video>
-			: <img class='media' src={src}></img>;
+
+		const Media = () =>
+			upload.type.includes('video')
+				? <video class='media' controls src={src}></video>
+				: <img class='media' src={src}></img>;
+
 		return ctx.html(
 			<html>
 				<head>
@@ -21,7 +24,7 @@ route.use('/*', async (ctx, next) => {
 						<h1 class='font-bold text-xl'>{upload.filename}</h1>
 						<p class='font-mono'>{upload.type}</p>
 					</div>
-					{element}
+					<Media />
 				</body>
 			</html>,
 		);

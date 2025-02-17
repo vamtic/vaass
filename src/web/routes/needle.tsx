@@ -1,6 +1,7 @@
 import { Hono } from '@hono/hono';
 import { DB } from '../../db.ts';
 import { StylesLink } from '../components/Styles.tsx';
+import { WEBSITE, WHO_AM_I } from '../../utils.ts';
 
 const route = new Hono();
 
@@ -25,6 +26,9 @@ route.use('/*', async (ctx, next) => {
 						<p class='font-mono'>{upload.type}</p>
 					</div>
 					<Media />
+					<p class='italic'>
+						Hosted by <a target='_blank' href={WEBSITE} class='font-bold hover:underline'>{WHO_AM_I}</a>
+					</p>
 				</body>
 			</html>,
 		);

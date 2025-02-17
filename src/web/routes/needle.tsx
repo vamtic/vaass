@@ -1,7 +1,8 @@
 import { Hono } from '@hono/hono';
 import { DB } from '../../db.ts';
+import { StylesLink } from '../components/Styles.tsx';
 
-export const route = new Hono();
+const route = new Hono();
 
 route.use('/*', async (ctx, next) => {
 	ctx.setRenderer(({ upload }) => {
@@ -11,10 +12,13 @@ route.use('/*', async (ctx, next) => {
 			<html>
 				<head>
 					<title>{upload.filename}</title>
+					<StylesLink />
 				</head>
-				<body>
-					<h1>{upload.filename}</h1>
-					<p>[{upload.type}]</p>
+				<body class='flex flex-col items-center justify-center bg-sky-300 text-xl'>
+					<div>
+						<h1>{upload.filename}</h1>
+						<p>[{upload.type}]</p>
+					</div>
 					{element}
 				</body>
 			</html>,

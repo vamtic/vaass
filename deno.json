@@ -2,6 +2,7 @@
 	"name": "@tycrek/yaass",
 	"license": "ISC",
 	"version": "0.0.0",
+	"website": "https://github.com/tycrek/yaass",
 	"exports": "./src/yaass.ts",
 	"tasks": {
 		"start": "deno run -A ./src/yaass.ts"

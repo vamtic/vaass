@@ -4,6 +4,7 @@ import * as path from '@std/path';
 import { exists } from '@std/fs';
 
 export const WHO_AM_I = `${pkg.name.split('/')[1]} v${pkg.version}`;
+export const WEBSITE = pkg.website;
 
 /**
  * Logger

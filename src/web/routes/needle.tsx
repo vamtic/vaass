@@ -28,10 +28,7 @@ route.get('/:needle/:disposition?', async (ctx) => {
 	const disposition = ctx.req.param('disposition') as 'attachment' | 'inline' | undefined;
 
 	const upload = DB.getUpload(needle);
-	if (!upload) {
-		ctx.status(404);
-		return ctx.text('not found');
-	}
+	if (!upload) return ctx.notFound();
 
 	if (disposition == 'attachment' || disposition == 'inline') {
 		ctx.header('Content-Length', `${upload.size}`);

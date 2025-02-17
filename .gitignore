@@ -1,1 +1,5 @@
+# node_modules required for Tailwind back compat
+node_modules/
+
+# yaass data
 data/

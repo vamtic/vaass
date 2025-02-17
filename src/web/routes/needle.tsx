@@ -43,6 +43,12 @@ route.get('/:needle/:disposition?', async (ctx) => {
 	const upload = DB.getUpload(needle);
 	if (!upload) return ctx.notFound();
 
+	// * temporary condition to load inline images on discord
+	// todo: replace with the fancy embed thing i forgot the name of
+	if (ctx.req.header('User-Agent')?.includes('discord') && disposition != 'inline') {
+		return ctx.redirect(ctx.get('domain').concat(`/${needle}/inline`));
+	}
+
 	if (disposition == 'attachment' || disposition == 'inline') {
 		ctx.header('Content-Length', `${upload.size}`);
 		ctx.header('Content-Type', upload.type);

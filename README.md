@@ -24,7 +24,7 @@ docker compose up
 
 ### Configure ShareX
 
-Add a new **Custom uploader** and conigure it as shown:
+Add a new **Custom uploader** and configure it as shown:
 
 | Option | Value |
 | --- | --- |

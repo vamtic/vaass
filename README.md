@@ -32,7 +32,7 @@ Add a new **Custom uploader** and conigure it as shown:
 | Request URL | `https://<your.domain>/upload` |
 | Body | Form data (multipart/form-data) |
 | File form name | file |
-| URL | `http://<your.domain>/{json:.sid}` |
+| URL | `{json:.url}` |
 
 *This is subject to change as project development continues.*
 

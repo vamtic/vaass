@@ -2,7 +2,7 @@ import { Hono } from '@hono/hono';
 import { WHO_AM_I } from '../utils.ts';
 import stylesheet from './routes/stylesheet.css.ts';
 import upload from './routes/upload.ts';
-import needle from './routes/needle.tsx';
+import needle from './routes/needle.ts';
 
 const app = new Hono();
 

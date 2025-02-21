@@ -1,6 +1,6 @@
 <div align="center">
 
-# yaass
+<h1><a href="https://github.com/tycrek/yaass" target="_blank"><img height="180" alt="yaass" src="https://images.tycrek.dev/yaass" /></a></h1>
 
 *Yet Another A ShareX Server*
 

@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+body {
+	@apply font-sans dark:bg-slate-900 dark:text-slate-100;
+}
+
 .flex-center {
 	@apply items-center justify-center;
 }

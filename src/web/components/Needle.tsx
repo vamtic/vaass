@@ -13,7 +13,7 @@ export default (upload: Upload, src: string) => {
 				<title>{upload.filename}</title>
 				<StylesLink />
 			</head>
-			<body class='h-screen flex flex-col flex-center font-sans dark:bg-slate-800 dark:text-slate-100'>
+			<body class='h-screen flex flex-col flex-center'>
 				<div class='text-center'>
 					<h1 class='font-bold text-xl'>{upload.filename}</h1>
 					<p class='font-mono'>{upload.type}</p>

@@ -7,7 +7,7 @@ const app = new Hono();
 app.use((ctx, next) => (ctx.set('domain', new URL(ctx.req.url).origin), next()));
 
 app.get('/favicon.ico', async (ctx) => {
-	ctx.header('Content-Type', 'image/image/x-icon');
+	ctx.header('Content-Type', 'image/x-icon');
 	return ctx.body(await Deno.readFile(join('assets/yaass.ico')));
 });
 app.get('/favicon.png', async (ctx) => {

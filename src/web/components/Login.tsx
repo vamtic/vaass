@@ -1,4 +1,3 @@
-import { WHO_AM_I } from '../../utils.ts';
 import Head from './Head.tsx';
 import Outlink from './Outlink.tsx';
 

@@ -1,4 +1,4 @@
-import { DB } from './db.ts';
+import { DB } from './database/db.ts';
 import { isDocker, log } from './utils.ts';
 import handler from './web/server.ts';
 

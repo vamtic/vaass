@@ -1,5 +1,5 @@
 import { Hono } from '@hono/hono';
-import { DB } from '../../db.ts';
+import { DB } from '../../database/db.ts';
 import Needle from '../pages/Needle.tsx';
 
 const route = new Hono();

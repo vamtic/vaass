@@ -1,7 +1,7 @@
 import { ensureDir } from '@std/fs';
 import { Database } from '@db/sqlite';
-import { log } from './utils.ts';
-import type { Upload } from './types/Upload.ts';
+import { log } from '../utils.ts';
+import type { Upload } from '../types/Upload.ts';
 
 // Prepare database on filesystem
 await ensureDir('data/uploads');

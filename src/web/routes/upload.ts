@@ -3,7 +3,7 @@ import { crypto } from '@std/crypto';
 import { encodeHex as hex } from '@std/encoding/hex';
 import { monotonicUlid as ulid } from '@std/ulid';
 import { generateRandomString, join, log } from '../../utils.ts';
-import { DB } from '../../db.ts';
+import { DB } from '../../database/db.ts';
 import type { Upload } from '../../types/Upload.ts';
 
 const route = new Hono();

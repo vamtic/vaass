@@ -4,7 +4,9 @@ import Outlink from '../components/Outlink.tsx';
 export default () => {
 	return (
 		<html>
-			<Head title='Login' />
+			<Head title='Login'>
+				<script src='/login/swap.js' />
+			</Head>
 			<body class='h-full flex flex-center'>
 				<div class='w-min rounded-2xl p-8 dark:bg-stone-800'>
 					<Outlink>

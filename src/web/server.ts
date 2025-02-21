@@ -20,7 +20,7 @@ app.route('/stylesheet.css', (await import('./routes/stylesheet.css.ts')).defaul
 app.route('/dashboard', (await import('./routes/dashboard.ts')).default);
 app.route('/login', (await import('./routes/login.ts')).default);
 app.route('/upload', (await import('./routes/upload.ts')).default);
-app.route('/', (await import('./routes/needle.ts')).default)
-	.get((ctx) => ctx.text(WHO_AM_I));
+app.route('/', (await import('./routes/needle.ts')).default);
+app.get('/', (ctx) => ctx.text(WHO_AM_I));
 
 export default app.fetch;

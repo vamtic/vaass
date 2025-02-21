@@ -1,8 +1,8 @@
 import { Hono } from '@hono/hono';
 import { deleteCookie, getCookie, getSignedCookie, setCookie, setSignedCookie } from '@hono/hono/cookie';
 import { DB } from '../../database/db.ts';
-import { join } from '@std/path/join';
 import LoginRegister from '../pages/LoginRegister.tsx';
+import { join } from '../../utils.ts';
 
 const route = new Hono();
 

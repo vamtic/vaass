@@ -1,5 +1,5 @@
 import { WEBSITE, WHO_AM_I } from '../../utils.ts';
-import Head from './Head.tsx';
+import Head from '../components/Head.tsx';
 import type { Upload } from '../../types/Upload.ts';
 
 export default (upload: Upload, src: string) => {

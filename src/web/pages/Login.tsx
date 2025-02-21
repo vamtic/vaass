@@ -1,5 +1,5 @@
-import Head from './Head.tsx';
-import Outlink from './Outlink.tsx';
+import Head from '../components/Head.tsx';
+import Outlink from '../components/Outlink.tsx';
 
 export default () => {
 	return (

@@ -43,3 +43,7 @@ More features are coming soon.
 - Multi-user support
 - Dashboards for both users & admins
 - *as well as most features previously in [ass](https://github.com/tycrek/ass)*
+
+## Contributing
+
+Contributions are welcome! Submit any changes via PR, but please detail what you've added. Please try to match the code style of the project when submitting changes.

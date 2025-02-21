@@ -38,7 +38,8 @@
 	],
 	"compilerOptions": {
 		"jsx": "precompile",
-		"jsxImportSource": "@hono/hono/jsx"
+		"jsxImportSource": "@hono/hono/jsx",
+		"lib": ["dom", "deno.ns"]
 	},
 	"nodeModulesDir": "auto",
 	"lock": false

@@ -5,6 +5,7 @@
 	"website": "https://github.com/tycrek/yaass",
 	"exports": "./src/yaass.ts",
 	"tasks": {
+		"dev": "deno run -A --watch ./src/yaass.ts",
 		"start": "deno run -A ./src/yaass.ts"
 	},
 	"imports": {

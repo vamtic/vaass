@@ -1,11 +1,10 @@
 import { Hono } from '@hono/hono';
+import { deleteCookie, getCookie, getSignedCookie, setCookie, setSignedCookie } from '@hono/hono/cookie';
 import { DB } from '../../db.ts';
 import Dashboard from '../components/Dashboard.tsx';
 
 const route = new Hono();
 
-route.get('/', async (ctx) => {
-	return ctx.html(Dashboard());
-});
+route.get('/', (ctx) => !getCookie(ctx, 'yaass') ? ctx.redirect('/login') : ctx.html(Dashboard()));
 
 export default route;

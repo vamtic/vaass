@@ -2,6 +2,7 @@ import { Hono } from '@hono/hono';
 import { crypto } from '@std/crypto';
 import { encodeHex as hex } from '@std/encoding/hex';
 import { monotonicUlid as ulid } from '@std/ulid';
+import { toArrayBuffer } from '@std/streams';
 import { generateRandomString, join, log } from '../../utils.ts';
 import { DB } from '../../database/db.ts';
 import type { Upload } from '../../types/Upload.ts';
@@ -35,7 +36,7 @@ route.post('/', async (ctx) => {
 		filename: file.name,
 		location,
 		timestamp: file.lastModified,
-		hash: hex(await crypto.subtle.digest('BLAKE3', stream)),
+		hash: hex(await crypto.subtle.digest('BLAKE3', await toArrayBuffer(stream))),
 		type: file.type,
 		size: file.size,
 		uploader_uid: '',

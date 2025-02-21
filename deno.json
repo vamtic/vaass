@@ -6,7 +6,7 @@
 	"exports": "./src/yaass.ts",
 	"tasks": {
 		"dev": "deno run -A --watch ./src/yaass.ts",
-		"start": "deno run -A ./src/yaass.ts"
+		"start": "deno run -E -R -W=data -N=0.0.0.0 -S=cpus,networkInterfaces,hostname,homedir --allow-run=getconf --allow-ffi ./src/yaass.ts"
 	},
 	"imports": {
 		"@db/sqlite": "jsr:@db/sqlite@^0.12.0",

@@ -1,7 +1,7 @@
 {
 	"name": "@tycrek/yaass",
 	"license": "ISC",
-	"version": "0.0.0",
+	"version": "0.0.0-f77f487",
 	"website": "https://github.com/tycrek/yaass",
 	"exports": "./src/yaass.ts",
 	"tasks": {

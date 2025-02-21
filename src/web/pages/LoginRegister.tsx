@@ -1,7 +1,7 @@
 import Head from '../components/Head.tsx';
 import Outlink from '../components/Outlink.tsx';
 
-export default () => {
+export default (visible: 'login' | 'register') => {
 	return (
 		<html>
 			<Head title='Login'>
@@ -12,7 +12,7 @@ export default () => {
 					<Outlink>
 						<img src='/favicon.png'></img>
 					</Outlink>
-					<form id='login' method='post'>
+					<form class={visible == 'login' ? '' : 'hidden'} id='login' action='/login' method='post'>
 						<p class='text-xl mt-8'>Username</p>
 						<input type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
@@ -24,10 +24,12 @@ export default () => {
 							</button>
 						</div>
 					</form>
-					<form class='hidden' id='register' method='post'>
+					<form class={visible == 'register' ? '' : 'hidden'} id='register' action='/register' method='post'>
 						<p class='text-xl mt-8'>Username</p>
 						<input type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
+						<input type='password' class='input-text'></input>
+						<p class='text-xl mt-4'>Confirm Password</p>
 						<input type='password' class='input-text'></input>
 						<div class='flex justify-around mt-4 gap-4 px-2'>
 							<button class='button basis-full' type='button' onclick='swap();'>Login</button>

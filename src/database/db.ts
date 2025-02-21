@@ -2,6 +2,7 @@ import { ensureDir } from '@std/fs';
 import { Database } from '@db/sqlite';
 import { log } from '../utils.ts';
 import type { Upload } from '../types/Upload.ts';
+import type { User } from '../types/User.ts';
 
 // Prepare database on filesystem
 await ensureDir('data/uploads');
@@ -19,6 +20,7 @@ export const DB = {
 			name TEXT,
 			username TEXT,
 			passhash TEXT,
+			owner BOOLEAN,
 			meta TEXT
 		);`,
 		).run();
@@ -63,4 +65,19 @@ export const DB = {
 
 	getUploads: (needle: string) =>
 		database.prepare(`SELECT * FROM uploads WHERE uploader_uid = ? OR filehash = ?;`).all<Upload>(needle, needle),
+
+	createUser: (user: User) =>
+		database.prepare(`
+			INSERT INTO users (uid, name, username, passhash, owner, meta)
+			VALUES (?, ?, ?, ?, ?, ?);`).run(
+			user.uid,
+			user.name,
+			user.username,
+			user.passhash,
+			user.owner,
+			user.meta,
+		),
+
+	getUser: (needle: string) =>
+		database.prepare(`SELECT * FROM users WHERE uid = ? OR username = ?;`).get<User>(needle, needle),
 };

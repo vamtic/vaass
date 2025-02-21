@@ -33,4 +33,4 @@ export type User = {
 	 * JSON of additional meta details. WIP
 	 */
 	meta: string;
-}
+};

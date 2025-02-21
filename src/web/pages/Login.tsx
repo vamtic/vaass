@@ -12,9 +12,9 @@ export default () => {
 					</Outlink>
 					<form method='post'>
 						<p class='text-xl mt-8'>Username</p>
-						<input type='text' autofocus class='p-0.5 border rounded border-rose-500'></input>
+						<input type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
-						<input type='password' class='p-0.5 border rounded border-rose-500'></input>
+						<input type='password' class='input-text'></input>
 						<div class='flex justify-around mt-4 gap-4 px-2'>
 							<button class='button basis-full' type='submit'>Login</button>
 							<button class='button basis-full'>Register</button>

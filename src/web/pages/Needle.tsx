@@ -4,9 +4,7 @@ import type { Upload } from '../../types/Upload.ts';
 
 export default (upload: Upload, src: string) => {
 	const Media = () =>
-		upload.type.includes('video')
-			? <video class='media' controls src={src}></video>
-			: <img class='media' src={src}></img>;
+		upload.type.includes('video') ? <video class='media' controls src={src}></video> : <img class='media' src={src}></img>;
 	return (
 		<html>
 			<Head title={upload.filename} />

@@ -1,4 +1,6 @@
 import { Hono } from '@hono/hono';
+import { stream as honostream } from '@hono/hono/streaming';
+import { log } from '../../utils.ts';
 import { DB } from '../../database/db.ts';
 import Needle from '../pages/Needle.tsx';
 
@@ -21,7 +23,19 @@ route.get('/:needle/:disposition?', async (ctx) => {
 		ctx.header('Content-Length', `${upload.size}`);
 		ctx.header('Content-Type', upload.type);
 		ctx.header('Content-Disposition', `${disposition}; filename=${upload.filename}`);
-		return ctx.body((await Deno.readFile(upload.location)).buffer);
+		ctx.header('Cache-Control', 'public, max-age=2592000'); // 1 month
+		ctx.header('Accept-Ranges', 'bytes');
+
+		return honostream(ctx, async (stream) => {
+			stream.onAbort(() => log.warn(`stream aborted!`));
+
+			// asynchronously pipe file as response
+			using file = await Deno.open(upload.location, { read: true });
+			await stream.pipe(file.readable);
+		}, (err, stream) => {
+			log.error(`${err.name}: ${err.message}\n${err.stack}`);
+			return Promise.resolve(stream.abort());
+		});
 	}
 
 	return ctx.html(Needle(upload, `${ctx.get('domain')}/${upload.sid}/inline`));

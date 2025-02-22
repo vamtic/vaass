@@ -10,7 +10,7 @@ const Error = (text: string) => (
 export default (mode: 'login' | 'register', error?: string) => {
 	return (
 		<html>
-			<Head title='Login'>
+			<Head title={mode == 'login' ? 'Login' : 'Register'}>
 				<script src='/login/swap.js' />
 			</Head>
 			<body class='h-full flex flex-center'>

@@ -29,7 +29,7 @@ export default (mode: 'login' | 'register', error?: string) => {
 						<p class='text-xl mt-4'>Password</p>
 						<input name='password' type='password' class='input-text'></input>
 						<div class='flex justify-around mt-4 gap-4 px-2'>
-							<button class='button basis-full' type='submit'>Login</button>
+							<button class='button basis-full font-bold' type='submit'>Login</button>
 							<button class='button basis-full' type='button' onclick='swap();'>
 								Register
 							</button>
@@ -46,7 +46,7 @@ export default (mode: 'login' | 'register', error?: string) => {
 						<input name='password2' type='password' class='input-text'></input>
 						<div class='flex justify-around mt-4 gap-4 px-2'>
 							<button class='button basis-full' type='button' onclick='swap();'>Login</button>
-							<button class='button basis-full' type='submit'>Register</button>
+							<button class='button basis-full font-bold' type='submit'>Register</button>
 						</div>
 					</form>
 

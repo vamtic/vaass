@@ -80,4 +80,12 @@ export const DB = {
 
 	getUser: (needle: string) =>
 		database.prepare(`SELECT * FROM users WHERE uid = ? OR username = ?;`).get<User>(needle, needle),
+
+	debug: () => {
+		log.debug('database details');
+		console.debug(`------------ users ------------`);
+		console.debug(database.prepare(`PRAGMA table_info(users);`).all());
+		console.debug(`------------ uploads ------------`);
+		console.debug(database.prepare(`PRAGMA table_info(uploads);`).all());
+	},
 };

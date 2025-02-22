@@ -59,8 +59,7 @@ export const DB = {
 			image.uploader_uid,
 		),
 
-	getUpload: (needle: string) =>
-		database.prepare(`SELECT * FROM uploads WHERE uid = ? OR sid = ?;`).get<Upload>(needle, needle),
+	getUpload: (needle: string) => database.prepare(`SELECT * FROM uploads WHERE uid = ? OR sid = ?;`).get<Upload>(needle, needle),
 
 	getUploads: (needle: string) =>
 		database.prepare(`SELECT * FROM uploads WHERE uploader_uid = ? OR filehash = ?;`).all<Upload>(needle, needle),
@@ -78,11 +77,11 @@ export const DB = {
 			user.meta,
 		),
 
-	getUser: (needle: string) =>
-		database.prepare(`SELECT * FROM users WHERE uid = ? OR username = ?;`).get<User>(needle, needle),
+	getUser: (needle: string) => database.prepare(`SELECT * FROM users WHERE uid = ? OR username = ?;`).get<User>(needle, needle),
 
-	getUserByToken: (token: string) =>
-		database.prepare(`SELECT * FROM users WHERE ',' || tokens || ',' LIKE ?;`).get<User>(`%,${token},%`),
+	getUserByToken: (token: string) => database.prepare(`SELECT * FROM users WHERE ',' || tokens || ',' LIKE ?;`).get<User>(`%,${token},%`),
+
+	getUsers: () => database.prepare(`SELECT * FROM USERS;`).all<User>(),
 
 	debug: () => {
 		log.debug('database details');

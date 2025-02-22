@@ -26,7 +26,7 @@ route.post('/', async (ctx) => {
 		username: form.username,
 		passhash: hash(form.password),
 		tokens: '',
-		owner: false,
+		owner: DB.getUsers().length === 0,
 		meta: JSON.stringify({}),
 	};
 

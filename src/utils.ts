@@ -1,7 +1,8 @@
 import Log from './Log.ts';
 import pkg from '../deno.json' with { type: 'json' };
 import * as path from '@std/path';
-import { exists } from '@std/fs';
+import { ensureDir, exists } from '@std/fs';
+import { crypto } from '@std/crypto';
 
 export const WHO_AM_I = `${pkg.name.split('/')[1]} v${pkg.version}`;
 export const WEBSITE = pkg.website;
@@ -28,4 +29,11 @@ export function generateRandomString(length: number) {
 		result += characters.charAt(Math.floor(Math.random() * characters.length));
 	}
 	return result;
+}
+
+// ! secret store (if someone knows if this is terrible practice please tell me)
+await ensureDir('data/uploads');
+await Deno.writeTextFile(join('data/.secret'), crypto.getRandomValues(new Uint32Array(16)).join(''));
+export async function SECRET() {
+	return await Deno.readTextFile(join('data/.secret'));
 }

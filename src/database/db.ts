@@ -1,11 +1,9 @@
-import { ensureDir } from '@std/fs';
 import { Database } from '@db/sqlite';
 import { log } from '../utils.ts';
 import type { Upload } from '../types/Upload.ts';
 import type { User } from '../types/User.ts';
 
 // Prepare database on filesystem
-await ensureDir('data/uploads');
 const database = new Database('data/yaass.db');
 
 export const DB = {

@@ -38,12 +38,9 @@ route.post('/', async (ctx) => {
 	if (user == null) return ctx.html(LoginRegister('login', 'Invalid username'));
 	if (!verify(form.password, user.passhash)) return ctx.html(LoginRegister('login', 'Invalid password'));
 
-	// ! JWT
-	setCookie(ctx, 'yaass', await jwt(user.uid, Math.floor(Date.now() / 1000)), {
-		secure: ctx.get('domain').startsWith('https'),
-	});
-
+	setCookie(ctx, 'yaass', await jwt(user.uid, Math.floor(Date.now() / 1000)), { secure: ctx.get('domain').startsWith('https') });
 	log.info(`user authenticated [${user.username}] [${user.uid}]`);
+
 	return ctx.redirect('/dashboard');
 });
 

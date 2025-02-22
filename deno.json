@@ -33,7 +33,7 @@
 		"indentWidth": 4,
 		"semiColons": true,
 		"singleQuote": true,
-		"lineWidth": 120,
+		"lineWidth": 140,
 		"exclude": [
 			"README.md"
 		]

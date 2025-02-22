@@ -1,10 +1,24 @@
 import { Hono } from '@hono/hono';
-import { setCookie /*, deleteCookie, getCookie, getSignedCookie, setSignedCookie */ } from '@hono/hono/cookie';
+import { setCookie } from '@hono/hono/cookie';
+import { sign } from '@hono/hono/jwt';
 import { DB } from '../../database/db.ts';
-import { join, log } from '../../utils.ts';
+import { join, log, SECRET } from '../../utils.ts';
 import { verify } from '../password.ts';
 import LoginRegister from '../pages/LoginRegister.tsx';
-import { ulid } from '@std/ulid';
+import type { JWTPayload } from '../../types/JWTPayload.ts';
+
+async function jwt(uid: string, timestamp: number) {
+	return await sign(
+		{
+			user: uid,
+			exp: timestamp + (72 * 60 * 60),
+			nbf: timestamp,
+			iat: timestamp,
+		} as JWTPayload,
+		await SECRET(),
+		'HS512',
+	);
+}
 
 const route = new Hono();
 
@@ -24,9 +38,12 @@ route.post('/', async (ctx) => {
 	if (user == null) return ctx.html(LoginRegister('login', 'Invalid username'));
 	if (!verify(form.password, user.passhash)) return ctx.html(LoginRegister('login', 'Invalid password'));
 
-	setCookie(ctx, 'yaass', ulid(), { secure: ctx.get('domain').startsWith('https') });
-	log.info(`user authenticated [${user.username}] [${user.uid}]`);
+	// ! JWT
+	setCookie(ctx, 'yaass', await jwt(user.uid, Math.floor(Date.now() / 1000)), {
+		secure: ctx.get('domain').startsWith('https'),
+	});
 
+	log.info(`user authenticated [${user.username}] [${user.uid}]`);
 	return ctx.redirect('/dashboard');
 });
 

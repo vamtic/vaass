@@ -1,11 +1,29 @@
 import { Hono } from '@hono/hono';
-import { deleteCookie, getCookie, getSignedCookie, setCookie, setSignedCookie } from '@hono/hono/cookie';
+import { verify } from '@hono/hono/jwt';
+import { getCookie } from '@hono/hono/cookie';
 import { DB } from '../../database/db.ts';
+import { log, SECRET } from '../../utils.ts';
 import Dashboard from '../pages/Dashboard.tsx';
 import LoginRegister from '../pages/LoginRegister.tsx';
+import type { JWTPayload } from '../../types/JWTPayload.ts';
 
 const route = new Hono();
 
-route.get('/', (ctx) => ctx.html(!getCookie(ctx, 'yaass') ? LoginRegister('login') : Dashboard()));
+route.get('/', async (ctx) => {
+	const unauthResponse = () => ctx.html(LoginRegister('login', 'You must be logged in'));
+	const token = getCookie(ctx, 'yaass');
+	if (!token) return unauthResponse();
+
+	try {
+		const payload = await verify(token, await SECRET(), 'HS512') as JWTPayload;
+		const user = DB.getUser(payload.user);
+
+		return user ? ctx.html(Dashboard(user)) : unauthResponse();
+	} catch (ex) {
+		const err = ex as { name: string; message: string };
+		log.error(`error: ${err.name}\n${ex}`);
+		return unauthResponse();
+	}
+});
 
 export default route;

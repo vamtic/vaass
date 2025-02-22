@@ -10,10 +10,10 @@ export default (visible: 'login' | 'register') => {
 			<body class='h-full flex flex-center'>
 				<div class='w-min rounded-2xl p-8 dark:bg-stone-800'>
 					<Outlink>
-						<img src='/favicon.png'></img>
+						<img class='mb-4' src='/favicon.png'></img>
 					</Outlink>
 					<form class={visible == 'login' ? '' : 'hidden'} id='login' action='/login' method='post'>
-						<p class='text-xl mt-8'>Username</p>
+						<p class='text-xl mt-4'>Username</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
 						<input name='password' type='password' class='input-text'></input>
@@ -25,7 +25,7 @@ export default (visible: 'login' | 'register') => {
 						</div>
 					</form>
 					<form class={visible == 'register' ? '' : 'hidden'} id='register' action='/register' method='post'>
-						<p class='text-xl mt-8'>Username</p>
+						<p class='text-xl mt-4'>Username</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
 						<input name='password' type='password' class='input-text'></input>

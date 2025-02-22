@@ -16,12 +16,12 @@ export const DB = {
 		database.prepare(
 			`CREATE TABLE IF NOT EXISTS users (
 			_id INTEGER PRIMARY KEY AUTOINCREMENT,
-			uid TEXT,
-			name TEXT,
-			username TEXT,
-			passhash TEXT,
-			owner BOOLEAN,
-			meta TEXT
+			uid TEXT NOT NULL,
+			name TEXT NOT NULL,
+			username TEXT NOT NULL,
+			passhash TEXT NOT NULL,
+			owner BOOLEAN NOT NULL,
+			meta JSON NOT NULL
 		);`,
 		).run();
 
@@ -29,15 +29,15 @@ export const DB = {
 		database.prepare(
 			`CREATE TABLE IF NOT EXISTS uploads (
 			_id INTEGER PRIMARY KEY AUTOINCREMENT,
-			uid TEXT,
-			sid TEXT,
-			filename TEXT,
-			location TEXT,
-			timestamp NUMBER,
-			hash TEXT,
-			type TEXT,
-			size NUMBER,
-			uploader_uid TEXT
+			uid TEXT NOT NULL,
+			sid TEXT NOT NULL,
+			filename TEXT NOT NULL,
+			location TEXT NOT NULL,
+			timestamp NUMBER NOT NULL,
+			hash TEXT NOT NULL,
+			type TEXT NOT NULL,
+			size NUMBER NOT NULL,
+			uploader_uid TEXT NOT NULL
 		);`,
 		).run();
 

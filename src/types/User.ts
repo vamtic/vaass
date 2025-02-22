@@ -25,6 +25,11 @@ export type User = {
 	passhash: string;
 
 	/**
+	 * List of upload tokens
+	 */
+	tokens: string;
+
+	/**
 	 * Is the user the owner of the server?
 	 */
 	owner: boolean;

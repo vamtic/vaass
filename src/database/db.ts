@@ -20,6 +20,7 @@ export const DB = {
 			name TEXT NOT NULL,
 			username TEXT NOT NULL,
 			passhash TEXT NOT NULL,
+			tokens TEXT NOT NULL,
 			owner BOOLEAN NOT NULL,
 			meta JSON NOT NULL
 		);`,
@@ -68,18 +69,22 @@ export const DB = {
 
 	createUser: (user: User) =>
 		database.prepare(`
-			INSERT INTO users (uid, name, username, passhash, owner, meta)
-			VALUES (?, ?, ?, ?, ?, ?);`).run(
+			INSERT INTO users (uid, name, username, passhash, tokens, owner, meta)
+			VALUES (?, ?, ?, ?, ?, ?, ?);`).run(
 			user.uid,
 			user.name,
 			user.username,
 			user.passhash,
+			user.tokens,
 			user.owner,
 			user.meta,
 		),
 
 	getUser: (needle: string) =>
 		database.prepare(`SELECT * FROM users WHERE uid = ? OR username = ?;`).get<User>(needle, needle),
+
+	getUserByToken: (token: string) =>
+		database.prepare(`SELECT * FROM users WHERE ',' || tokens || ',' LIKE ?;`).get<User>(`%,${token},%`),
 
 	debug: () => {
 		log.debug('database details');

@@ -25,6 +25,7 @@ route.post('/', async (ctx) => {
 		name: form.username[0].toUpperCase() + form.username.substring(1),
 		username: form.username,
 		passhash: hash(form.password),
+		tokens: '',
 		owner: false,
 		meta: JSON.stringify({}),
 	};

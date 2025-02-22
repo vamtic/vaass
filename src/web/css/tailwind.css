@@ -19,3 +19,7 @@ body {
 .media {
 	@apply rounded-2xl my-4;
 }
+
+.icon {
+	@apply p-4 border-2 rounded-2xl border-stone-500 hover:border-rose-500 transition-colors hover:cursor-pointer select-none;
+}

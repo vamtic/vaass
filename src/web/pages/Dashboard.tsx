@@ -5,6 +5,7 @@ export default () => {
 	return (
 		<html>
 			<Head title='Dashboard' />
+			<body>dashboard</body>
 		</html>
 	);
 };

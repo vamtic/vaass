@@ -1,7 +1,13 @@
 import Head from '../components/Head.tsx';
 import Outlink from '../components/Outlink.tsx';
 
-export default (visible: 'login' | 'register') => {
+const Error = (text: string) => (
+	<div class='text-center'>
+		<span class='text-red-500 font-bold'>{text}</span>
+	</div>
+);
+
+export default (mode: 'login' | 'register', error?: string) => {
 	return (
 		<html>
 			<Head title='Login'>
@@ -10,9 +16,14 @@ export default (visible: 'login' | 'register') => {
 			<body class='h-full flex flex-center'>
 				<div class='w-min rounded-2xl p-8 dark:bg-stone-800'>
 					<Outlink>
-						<img class='mb-4' src='/favicon.png'></img>
+						<img class='mb-4' src='/favicon.png' />
 					</Outlink>
-					<form class={visible == 'login' ? '' : 'hidden'} id='login' action='/login' method='post'>
+
+					{/* insert Error element if, one was supplied */}
+					{error != null ? Error(`${error}`) : ''}
+
+					{/* Login form */}
+					<form class={mode == 'login' ? '' : 'hidden'} id='login' action='/login' method='post'>
 						<p class='text-xl mt-4'>Username</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
@@ -24,7 +35,9 @@ export default (visible: 'login' | 'register') => {
 							</button>
 						</div>
 					</form>
-					<form class={visible == 'register' ? '' : 'hidden'} id='register' action='/register' method='post'>
+
+					{/* Register form */}
+					<form class={mode == 'register' ? '' : 'hidden'} id='register' action='/register' method='post'>
 						<p class='text-xl mt-4'>Username</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
@@ -36,6 +49,7 @@ export default (visible: 'login' | 'register') => {
 							<button class='button basis-full' type='submit'>Register</button>
 						</div>
 					</form>
+
 					<div class='mt-4 text-sm italic text-center'>
 						<Outlink />
 					</div>

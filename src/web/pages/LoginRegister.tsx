@@ -14,9 +14,9 @@ export default (visible: 'login' | 'register') => {
 					</Outlink>
 					<form class={visible == 'login' ? '' : 'hidden'} id='login' action='/login' method='post'>
 						<p class='text-xl mt-8'>Username</p>
-						<input type='text' autofocus class='input-text'></input>
+						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
-						<input type='password' class='input-text'></input>
+						<input name='password' type='password' class='input-text'></input>
 						<div class='flex justify-around mt-4 gap-4 px-2'>
 							<button class='button basis-full' type='submit'>Login</button>
 							<button class='button basis-full' type='button' onclick='swap();'>
@@ -26,11 +26,11 @@ export default (visible: 'login' | 'register') => {
 					</form>
 					<form class={visible == 'register' ? '' : 'hidden'} id='register' action='/register' method='post'>
 						<p class='text-xl mt-8'>Username</p>
-						<input type='text' autofocus class='input-text'></input>
+						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
-						<input type='password' class='input-text'></input>
+						<input name='password' type='password' class='input-text'></input>
 						<p class='text-xl mt-4'>Confirm Password</p>
-						<input type='password' class='input-text'></input>
+						<input name='password2' type='password' class='input-text'></input>
 						<div class='flex justify-around mt-4 gap-4 px-2'>
 							<button class='button basis-full' type='button' onclick='swap();'>Login</button>
 							<button class='button basis-full' type='submit'>Register</button>

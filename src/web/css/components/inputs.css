@@ -1,0 +1,7 @@
+.button {
+	@apply py-1 px-2 rounded-lg bg-rose-400 dark:bg-rose-600 hover:bg-rose-500 hover:cursor-pointer;
+}
+
+.input-text {
+	@apply p-0.5 border rounded border-rose-500;
+}

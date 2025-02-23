@@ -1,19 +1,10 @@
 @import 'tailwindcss';
 
+@import './components/flex.css';
+@import './components/inputs.css';
+
 body {
 	@apply font-sans dark:bg-stone-900 dark:text-stone-100;
-}
-
-.button {
-	@apply py-1 px-2 rounded-lg bg-rose-400 dark:bg-rose-600 hover:bg-rose-500 hover:cursor-pointer;
-}
-
-.input-text {
-	@apply p-0.5 border rounded border-rose-500;
-}
-
-.flex-center {
-	@apply items-center justify-center;
 }
 
 .media {

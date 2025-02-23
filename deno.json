@@ -6,7 +6,7 @@
 	"exports": "./src/yaass.ts",
 	"tasks": {
 		"dev": "deno run -A --watch ./src/yaass.ts",
-		"start": "deno run -E -N -R -W=data,$DENO_DIR -S=cpus,networkInterfaces,hostname,homedir --allow-run=getconf --allow-ffi ./src/yaass.ts",
+		"start": "deno run -E -N -R -W=data,/deno-dir/ -S=cpus,networkInterfaces,hostname,homedir --allow-run=getconf --allow-ffi ./src/yaass.ts",
 		"rm-data": "rm -drf ./data/",
 		"clean": {
 			"command": "deno task dev",

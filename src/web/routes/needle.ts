@@ -6,7 +6,7 @@ import Needle from '../pages/Needle.tsx';
 
 const route = new Hono();
 
-route.get('/:needle/:disposition?', async (ctx) => {
+route.get('/:needle/:disposition?', (ctx) => {
 	const needle = ctx.req.param('needle');
 	const disposition = ctx.req.param('disposition') as 'attachment' | 'inline' | undefined;
 

@@ -22,6 +22,8 @@ deno task start
 docker compose up
 ```
 
+For support, [visit the Discord](https://discord.gg/wGZYt5fasY).
+
 ### Configure ShareX
 
 Add a new **Custom uploader** and configure it as shown:
@@ -35,6 +37,12 @@ Add a new **Custom uploader** and configure it as shown:
 | URL | `{json:.url}` |
 
 *This is subject to change as project development continues.*
+
+#### Optional headers
+
+| Header | Usage |
+| --- | --- |
+| `x-yaass-sid-method` | can be `default` or `gfycat`. previously known as "access mode" in ass |
 
 ## What next?
 

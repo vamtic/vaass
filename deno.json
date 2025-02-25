@@ -5,9 +5,13 @@
 	"website": "https://github.com/tycrek/yaass",
 	"exports": "./src/yaass.ts",
 	"tasks": {
-		"dev": "deno run -A --watch ./src/yaass.ts",
+		"dev-fmt": "deno fmt --watch",
+		"dev-run": "deno run -A --watch ./src/yaass.ts",
 		"start": "deno run -E -N -R -W=data,/deno-dir/ -S=cpus,networkInterfaces,hostname,homedir --allow-run=getconf --allow-ffi ./src/yaass.ts",
 		"rm-data": "rm -drf ./data/",
+		"dev": {
+			"dependencies": ["dev-fmt", "dev-run"]
+		},
 		"clean": {
 			"command": "deno task dev",
 			"dependencies": ["rm-data"]

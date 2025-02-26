@@ -1,8 +1,8 @@
-import Log from './Log.ts';
 import pkg from '../deno.json' with { type: 'json' };
 import * as path from '@std/path';
 import { ensureDir, exists } from '@std/fs';
 import { crypto } from '@std/crypto';
+import Log from '@tycrek/log';
 
 export const WHO_AM_I = `${pkg.name.split('/')[1]} v${pkg.version}`;
 export const WEBSITE = pkg.website;
@@ -10,7 +10,7 @@ export const WEBSITE = pkg.website;
 /**
  * Logger
  */
-export const log = new Log(`${WHO_AM_I} |`);
+export const log = new Log({ prefix: `${WHO_AM_I} |` });
 
 /**
  * Are we in a Docker container?

@@ -28,6 +28,7 @@
 		"@std/ulid": "jsr:@std/ulid@^1.0.0",
 		"@stdext/crypto": "jsr:@stdext/crypto@^0.1.0",
 		"@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.0.6",
+		"@tycrek/log": "jsr:@tycrek/log@^1.0.0",
 		"cssnano": "npm:cssnano@^7.0.6",
 		"postcss": "npm:postcss@^8.5.2",
 		"tailwindcss": "npm:tailwindcss@^4.0.6"

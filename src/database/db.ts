@@ -4,7 +4,7 @@ import type { Upload } from '../types/Upload.ts';
 import type { User } from '../types/User.ts';
 
 // Prepare database on filesystem
-const database = new Database('data/yaass.db');
+const database = new Database('data/eien.db');
 
 export const DB = {
 	init: () => {

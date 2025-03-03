@@ -56,7 +56,7 @@ route.post('/', async (ctx) => {
 	const upload: Upload = {
 		uid,
 		sid: await generateShortId({
-			method: ctx.req.header('x-yaass-sid-method') == 'gfycat' ? 'gfycat' : 'default',
+			method: ctx.req.header('x-eien-sid-method') == 'gfycat' ? 'gfycat' : 'default',
 			size: 10,
 		}),
 		filename: file.name,

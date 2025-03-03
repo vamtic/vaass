@@ -1,5 +1,5 @@
 FROM denoland/deno:alpine-2.2.1
-WORKDIR /yaass
+WORKDIR /eien
 
 # cache dependencies
 COPY deno.json .
@@ -9,6 +9,6 @@ USER deno
 
 # internally cache compiled source
 COPY . .
-RUN deno cache ./src/yaass.ts
+RUN deno cache ./src/eien.ts
 
 CMD deno task start

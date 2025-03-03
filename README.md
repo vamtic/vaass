@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1><a href="https://github.com/tycrek/yaass" target="_blank"><img height="180" alt="yaass" src="https://images.tycrek.dev/yaass" /></a></h1>
+<h1><a href="https://github.com/tycrek/eien" target="_blank"><img height="180" alt="eien" src="https://images.tycrek.dev/yaass" /></a></h1>
 
 *Yet Another A ShareX Server*
 
@@ -8,12 +8,12 @@
 
 ## How to use
 
-yaass is simple: Install either [Deno](https://deno.com/) or [Docker Compose](https://docs.docker.com/compose/).
+eien is simple: Install either [Deno](https://deno.com/) or [Docker Compose](https://docs.docker.com/compose/).
 
 ```bash
 # Download this project
-git clone https://github.com/tycrek/yaass.git
-cd yaass/
+git clone https://github.com/tycrek/eien.git
+cd eien/
 
 # If you chose Deno:
 deno task start
@@ -42,7 +42,7 @@ Add a new **Custom uploader** and configure it as shown:
 
 | Header | Usage |
 | --- | --- |
-| `x-yaass-sid-method` | can be `default` or `gfycat`. previously known as "access mode" in ass |
+| `x-eien-sid-method` | can be `default` or `gfycat`. previously known as "access mode" in ass |
 
 ## What next?
 

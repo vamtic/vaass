@@ -1,13 +1,13 @@
 {
-	"name": "@tycrek/yaass",
+	"name": "@tycrek/eien",
 	"license": "ISC",
 	"version": "0.0.0-292b733",
-	"website": "https://github.com/tycrek/yaass",
-	"exports": "./src/yaass.ts",
+	"website": "https://github.com/tycrek/eien",
+	"exports": "./src/eien.ts",
 	"tasks": {
 		"dev-fmt": "deno fmt --watch",
-		"dev-run": "deno run -A --watch ./src/yaass.ts",
-		"start": "deno run -E -N -R -W=data,/deno-dir/ -S=cpus,networkInterfaces,hostname,homedir --allow-run=getconf --allow-ffi ./src/yaass.ts",
+		"dev-run": "deno run -A --watch ./src/eien.ts",
+		"start": "deno run -E -N -R -W=data,/deno-dir/ -S=cpus,networkInterfaces,hostname,homedir --allow-run=getconf --allow-ffi ./src/eien.ts",
 		"rm-data": "rm -drf ./data/",
 		"dev": {
 			"dependencies": ["dev-fmt", "dev-run"]

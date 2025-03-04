@@ -1,16 +1,8 @@
 services:
-  eien:
+  yaass:
     build: .
     restart: unless-stopped
     volumes:
-      - ./data:/eien/data
+      - ./data:/yaass/data
     ports:
       - '6969:6969'
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 200M
-        reservations:
-          cpus: '0.25'
-          memory: 100M

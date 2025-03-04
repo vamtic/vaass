@@ -20,7 +20,7 @@ export type Upload = {
 	filename: string;
 
 	/**
-	 * Location on disk relative to eien root
+	 * Location on disk relative to yaass root
 	 */
 	location: string;
 

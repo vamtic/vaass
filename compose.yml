@@ -6,3 +6,11 @@ services:
       - ./data:/yaass/data
     ports:
       - '6969:6969'
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+        reservations:
+          cpus: '0.5'
+          memory: 512M

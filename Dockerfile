@@ -5,7 +5,8 @@ WORKDIR /yaass
 COPY deno.json .
 RUN deno install
 
-USER deno
+# ! broken with deno 2.2.3 for some reason
+#USER deno
 
 # internally cache compiled source
 COPY . .

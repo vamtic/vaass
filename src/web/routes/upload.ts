@@ -6,6 +6,7 @@ import { toArrayBuffer } from '@std/streams';
 import { generateRandomString, join, log } from '../../utils.ts';
 import { DB } from '../../database/db.ts';
 import type { Upload } from '../../types/Upload.ts';
+import { exists } from '@std/fs';
 
 const generateShortId = async (options: {
 	method: 'default' | 'gfycat';
@@ -33,6 +34,14 @@ const generateShortId = async (options: {
 const route = new Hono();
 
 route.post('/', async (ctx) => {
+	// ! check authorization (! WILL BE CHANGED EVENTUALLY !)
+	const secretFile = join('data/.authorization');
+	if (await exists(secretFile)) {
+		const secret = (await Deno.readTextFile(secretFile)).trim();
+		if (!ctx.req.header('Authorization')) return ctx.text('Unauthorized', 401);
+		else if (ctx.req.header('Authorization') !== secret) return ctx.text('Forbidden', 403);
+	}
+
 	const body = await ctx.req.formData();
 
 	if (!body.has('file')) {

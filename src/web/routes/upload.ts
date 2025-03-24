@@ -80,7 +80,7 @@ route.post('/', async (ctx) => {
 
 	log.info(`uploaded: ${upload.sid} [${upload.type}] [${upload.filename}] [${uid}]`);
 
-	return ctx.json({ url: `${ctx.get('domain')}/${upload.sid}` });
+	return ctx.json({ url: `${ctx.get('domain')}/${upload.sid}`, sid: upload.sid });
 });
 
 export default route;

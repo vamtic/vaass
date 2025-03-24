@@ -16,7 +16,7 @@ route.get('/:needle/:disposition?', (ctx) => {
 	// * temporary condition to load inline images on discord
 	// todo: replace with the fancy embed thing i forgot the name of
 	if (ctx.req.header('User-Agent')?.includes('discord') && disposition != 'inline') {
-		return ctx.redirect(ctx.get('domain').concat(`/${needle}/inline`));
+		return ctx.redirect(ctx.get('domain').concat(`${needle}/inline`));
 	}
 
 	if (disposition == 'attachment' || disposition == 'inline') {
@@ -38,7 +38,7 @@ route.get('/:needle/:disposition?', (ctx) => {
 		});
 	}
 
-	return ctx.html(Needle(upload, `${ctx.get('domain')}/${upload.sid}/inline`));
+	return ctx.html(Needle(upload, `${upload.sid}/inline`));
 });
 
 export default route;

@@ -11,19 +11,19 @@ export default (mode: 'login' | 'register', error?: string) => {
 	return (
 		<html>
 			<Head title={mode == 'login' ? 'Login' : 'Register'}>
-				<script src='/login/swap.js' />
+				<script src='login/swap.js' />
 			</Head>
 			<body class='h-full flex flex-center'>
 				<div class='w-min rounded-2xl p-8 dark:bg-stone-800'>
 					<Outlink>
-						<img class='mb-4' src='/favicon.png' />
+						<img class='mb-4' src='favicon.png' />
 					</Outlink>
 
 					{/* insert Error element if, one was supplied */}
 					{error != null ? Error(`${error}`) : ''}
 
 					{/* Login form */}
-					<form class={mode == 'login' ? '' : 'hidden'} id='login' action='/login' method='post'>
+					<form class={mode == 'login' ? '' : 'hidden'} id='login' action='login' method='post'>
 						<p class='text-xl mt-4'>Username</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>
@@ -37,7 +37,7 @@ export default (mode: 'login' | 'register', error?: string) => {
 					</form>
 
 					{/* Register form */}
-					<form class={mode == 'register' ? '' : 'hidden'} id='register' action='/register' method='post'>
+					<form class={mode == 'register' ? '' : 'hidden'} id='register' action='register' method='post'>
 						<p class='text-xl mt-4'>Username</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>

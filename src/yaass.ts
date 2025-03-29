@@ -5,7 +5,7 @@ import handler from './web/server.ts';
 log.info(`[bun ${Bun.version_with_sha}] [${isDocker ? 'container' : 'native'}]`);
 DB.init();
 
-// Host Deno server
+// Host Bun server
 Bun.serve({
 	port: 6969,
 	fetch: handler,

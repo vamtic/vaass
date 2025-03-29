@@ -1,4 +1,4 @@
-import pkg from '../deno.json' with { type: 'json' };
+import pkg from '../package.json';
 import * as path from 'node:path';
 // todo: dont use fs extra
 import crypto from 'node:crypto';

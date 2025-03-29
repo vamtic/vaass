@@ -1,12 +1,10 @@
-import { Hono } from '@hono/hono';
+import { Hono } from 'hono';
 import { crypto } from '@std/crypto';
 import { encodeHex as hex } from '@std/encoding/hex';
 import { monotonicUlid as ulid } from '@std/ulid';
-import { toArrayBuffer } from '@std/streams';
 import { generateRandomString, join, log } from '../../utils.ts';
 import { DB } from '../../database/db.ts';
 import type { Upload } from '../../types/Upload.ts';
-import { exists } from '@std/fs';
 
 const generateShortId = async (options: {
 	method: 'default' | 'gfycat';
@@ -18,8 +16,8 @@ const generateShortId = async (options: {
 		const sz = options.gfySize ? options.gfySize : 2;
 		const getWord = (list: string[], delim = '') => list[Math.floor(Math.random() * list.length)].concat(delim);
 
-		const adjectives = (await Deno.readTextFile(join('./assets/gfycat/adjectives.txt'))).split('\n');
-		const animals = (await Deno.readTextFile(join('./assets/gfycat/animals.txt'))).split('\n');
+		const adjectives = (await Bun.file(join('./assets/gfycat/adjectives.txt')).text()).split('\n');
+		const animals = (await Bun.file(join('./assets/gfycat/animals.txt')).text()).split('\n');
 
 		let gfycat = '';
 		for (let i = 0; i < sz; i++) {
@@ -36,8 +34,8 @@ const route = new Hono();
 route.post('/', async (ctx) => {
 	// ! check authorization (! WILL BE CHANGED EVENTUALLY !)
 	const secretFile = join('data/.authorization');
-	if (await exists(secretFile)) {
-		const secret = (await Deno.readTextFile(secretFile)).trim();
+	if (await Bun.file(secretFile).exists()) {
+		const secret = (await Bun.file(secretFile).text()).trim();
 		if (!ctx.req.header('Authorization')) return ctx.text('Unauthorized', 401);
 		else if (ctx.req.header('Authorization') !== secret) return ctx.text('Forbidden', 403);
 	}
@@ -56,10 +54,10 @@ route.post('/', async (ctx) => {
 	const uid = ulid();
 	const nameOnDisk = `${uid}.${file.name.includes('.') ? file.name.split('.').pop() : 'unknown'}`;
 	const location = 'data/uploads/' + nameOnDisk;
-	const stream = file.stream();
+	// const stream = file.stream();
 
 	// Save file to disk
-	await Deno.writeFile(join(location), stream);
+	await Bun.write(join(location), await file.bytes());
 
 	// Save details to database
 	const upload: Upload = {
@@ -71,7 +69,7 @@ route.post('/', async (ctx) => {
 		filename: file.name,
 		location,
 		timestamp: file.lastModified,
-		hash: hex(await crypto.subtle.digest('BLAKE3', await toArrayBuffer(stream))),
+		hash: hex(await crypto.subtle.digest('BLAKE3', await file.arrayBuffer())),
 		type: file.type,
 		size: file.size,
 		uploader_uid: '',

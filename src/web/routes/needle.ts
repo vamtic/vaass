@@ -1,5 +1,5 @@
-import { Hono } from '@hono/hono';
-import { stream as honostream } from '@hono/hono/streaming';
+import { Hono } from 'hono';
+import { stream as honostream } from 'hono/streaming';
 import { log } from '../../utils.ts';
 import { DB } from '../../database/db.ts';
 import Needle from '../pages/Needle.tsx';

@@ -1,6 +1,6 @@
 import pkg from '../deno.json' with { type: 'json' };
-import * as path from '@std/path';
-import { ensureDir, exists } from '@std/fs';
+import * as path from 'node:path';
+// todo: dont use fs extra
 import { crypto } from '@std/crypto';
 import Log from '@tycrek/log';
 
@@ -15,7 +15,7 @@ export const log = new Log({ prefix: `${WHO_AM_I} |` });
 /**
  * Are we in a Docker container?
  */
-export const isDocker = await exists('/.dockerenv');
+export const isDocker = await Bun.file('/.dockerenv').exists();
 
 /**
  * Path joiner

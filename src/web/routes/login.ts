@@ -1,6 +1,6 @@
-import { Hono } from '@hono/hono';
-import { setCookie } from '@hono/hono/cookie';
-import { sign } from '@hono/hono/jwt';
+import { Hono } from 'hono';
+import { setCookie } from 'hono/cookie';
+import { sign } from 'hono/jwt';
 import { DB } from '../../database/db.ts';
 import { join, log, SECRET } from '../../utils.ts';
 import { verify } from '../password.ts';
@@ -26,7 +26,7 @@ route.get('/', (ctx) => ctx.html(LoginRegister('login')));
 
 route.get('/swap.js', async (ctx) => {
 	ctx.header('Content-Type', 'text/javascript');
-	return ctx.body(await Deno.readTextFile(join('src/web/js/login-swap.js')));
+	return ctx.body(await Bun.file(join('src/web/js/login-swap.js')).text());
 });
 
 route.post('/', async (ctx) => {

@@ -1,5 +1,5 @@
 import { ulid } from '@std/ulid';
-import { Hono } from '@hono/hono';
+import { Hono } from 'hono';
 // import { deleteCookie, getCookie, getSignedCookie, setCookie, setSignedCookie } from '@hono/hono/cookie';
 import { log } from '../../utils.ts';
 import { DB } from '../../database/db.ts';

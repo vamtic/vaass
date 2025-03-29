@@ -1,4 +1,4 @@
-import { Hono } from '@hono/hono';
+import { Hono } from 'hono';
 import index from './routes/index.ts';
 
 const app = new Hono();

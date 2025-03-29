@@ -1,12 +1,10 @@
-import { Hono } from '@hono/hono';
-import { stream as honostream } from '@hono/hono/streaming';
-import { log } from '../../utils.ts';
+import { Hono } from 'hono';
 import { DB } from '../../database/db.ts';
 import Needle from '../pages/Needle.tsx';
 
 const route = new Hono();
 
-route.get('/:needle/:disposition?', (ctx) => {
+route.get('/:needle/:disposition?', async (ctx) => {
 	const needle = ctx.req.param('needle');
 	const disposition = ctx.req.param('disposition') as 'attachment' | 'inline' | undefined;
 
@@ -26,7 +24,9 @@ route.get('/:needle/:disposition?', (ctx) => {
 		ctx.header('Cache-Control', 'public, max-age=2592000'); // 1 month
 		ctx.header('Accept-Ranges', 'bytes');
 
-		return honostream(ctx, async (stream) => {
+		// todo: potentially re-optimize?
+		return ctx.body(await Bun.file(upload.location).arrayBuffer())
+		/*return honostream(ctx, async (stream) => {
 			stream.onAbort(() => log.warn(`stream aborted!`));
 
 			// asynchronously pipe file as response
@@ -35,7 +35,7 @@ route.get('/:needle/:disposition?', (ctx) => {
 		}, (err, stream) => {
 			log.error(`${err.name}: ${err.message}\n${err.stack}`);
 			return Promise.resolve(stream.abort());
-		});
+		});*/
 	}
 
 	return ctx.html(Needle(upload, `${ctx.get('domain')}/${upload.sid}/inline`));

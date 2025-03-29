@@ -1,4 +1,4 @@
-declare module '@hono/hono' {
+declare module 'hono' {
 	interface ContextVariableMap {
 		/**
 		 * Domain (and optionally port) the request was called via

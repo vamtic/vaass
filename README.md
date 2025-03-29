@@ -8,15 +8,15 @@
 
 ## How to use
 
-yaass is simple: Install either [Deno](https://deno.com/) or [Docker Compose](https://docs.docker.com/compose/).
+yaass is simple: Install either [Bun](https://bun.sh/) or [Docker Compose](https://docs.docker.com/compose/).
 
 ```bash
 # Download this project
 git clone https://github.com/tycrek/yaass.git
 cd yaass/
 
-# If you chose Deno:
-deno task start
+# If you chose Bun:
+bun run src/yaass.ts
 
 # Or you chose Docker:
 docker compose up

@@ -1,6 +1,6 @@
-import { Hono } from '@hono/hono';
-import { verify } from '@hono/hono/jwt';
-import { getCookie } from '@hono/hono/cookie';
+import { Hono } from 'hono';
+import { verify } from 'hono/jwt';
+import { getCookie } from 'hono/cookie';
 import { DB } from '../../database/db.ts';
 import { log, SECRET } from '../../utils.ts';
 import Dashboard from '../pages/Dashboard.tsx';

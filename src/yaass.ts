@@ -2,15 +2,13 @@ import { DB } from './database/db.ts';
 import { isDocker, log } from './utils.ts';
 import handler from './web/server.ts';
 
-log.info(
-	`[deno ${Deno.version.deno}] [typescript ${Deno.version.typescript}] ` +
-		`[${Deno.hostname()}] [${isDocker ? 'container' : 'native'}]`,
-);
+log.info(`[bun ${Bun.version_with_sha}] [${isDocker ? 'container' : 'native'}]`);
 DB.init();
 
-// Host Deno server
-Deno.serve({
+// Host Bun server
+Bun.serve({
 	port: 6969,
-	handler,
-	onListen: ({ port, hostname }) => log.info(`server started: http://${hostname}:${port}`),
+	fetch: handler,
 });
+
+log.info(`server started: http://0.0.0.0:6969`);

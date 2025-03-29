@@ -5,13 +5,13 @@ import crypto from 'node:crypto';
 import Log from '@tycrek/log';
 import { mkdir } from 'node:fs/promises';
 
-export const WHO_AM_I = `${pkg.name.split('/')[1]} v${pkg.version}`;
+export const WHO_AM_I = `${pkg.name} v${pkg.version}`;
 export const WEBSITE = pkg.website;
 
 /**
  * Logger
  */
-export const log = new Log({ prefix: `${WHO_AM_I} |` });
+export const log = new Log({ prefix: WHO_AM_I, showTimestamps: true, separator: '>' });
 
 /**
  * Are we in a Docker container?

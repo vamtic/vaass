@@ -4,6 +4,7 @@
     "": {
       "name": "yaass",
       "dependencies": {
+        "@std/encoding": "npm:@jsr/std__encoding",
         "@std/ulid": "npm:@jsr/std__ulid",
         "@tailwindcss/postcss": "^4.0.17",
         "@tycrek/log": "^1.2.0",
@@ -22,6 +23,8 @@
   },
   "packages": {
     "@alloc/quick-lru": ["@alloc/quick-lru@5.2.0", "", {}, "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="],
+
+    "@std/encoding": ["@jsr/std__encoding@1.0.8", "https://npm.jsr.io/~/11/@jsr/std__encoding/1.0.8.tgz", {}, "sha512-66VCtyqfxHO1kJiRyRYs19cCnYtfcCjqvYSfseFa0sn71tpYMK5C3Bs8m4eTb2QKjfwD4Imwm2+DSN1WHH6XRw=="],
 
     "@std/ulid": ["@jsr/std__ulid@1.0.0", "https://npm.jsr.io/~/11/@jsr/std__ulid/1.0.0.tgz", {}, "sha512-RvVolUwRoFtoSuYZROBmhCYEIuI4xsxeHjGGbJQZVDCBnDBJwfm16vOJyE1Va9+BnTl1iW7o1nCloBI+EQAWVg=="],
 

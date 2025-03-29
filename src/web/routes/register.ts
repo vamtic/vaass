@@ -22,7 +22,7 @@ route.post('/', async (ctx) => {
 
 	const newUser: User = {
 		uid: ulid(),
-		name: form.username[0].toUpperCase() + form.username.substring(1),
+		name: form.username[0]!.toUpperCase() + form.username.substring(1),
 		username: form.username,
 		passhash: hash(form.password),
 		tokens: '',

@@ -1,5 +1,4 @@
 import { Hono } from 'hono';
-import { crypto } from '@std/crypto';
 import { encodeHex as hex } from '@std/encoding/hex';
 import { monotonicUlid as ulid } from '@std/ulid';
 import { generateRandomString, join, log } from '../../utils.ts';
@@ -14,7 +13,7 @@ const generateShortId = async (options: {
 	// todo: optimize
 	if (options.method == 'gfycat') {
 		const sz = options.gfySize ? options.gfySize : 2;
-		const getWord = (list: string[], delim = '') => list[Math.floor(Math.random() * list.length)].concat(delim);
+		const getWord = (list: string[], delim = '') => list[Math.floor(Math.random() * list.length)]!.concat(delim);
 
 		const adjectives = (await Bun.file(join('./assets/gfycat/adjectives.txt')).text()).split('\n');
 		const animals = (await Bun.file(join('./assets/gfycat/animals.txt')).text()).split('\n');
@@ -69,7 +68,7 @@ route.post('/', async (ctx) => {
 		filename: file.name,
 		location,
 		timestamp: file.lastModified,
-		hash: hex(await crypto.subtle.digest('BLAKE3', await file.arrayBuffer())),
+		hash: hex(Bun.hash(await file.arrayBuffer()).toString()),
 		type: file.type,
 		size: file.size,
 		uploader_uid: '',

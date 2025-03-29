@@ -1,8 +1,9 @@
 import pkg from '../deno.json' with { type: 'json' };
 import * as path from 'node:path';
 // todo: dont use fs extra
-import { crypto } from '@std/crypto';
+import crypto from 'node:crypto';
 import Log from '@tycrek/log';
+import { mkdir } from 'node:fs/promises';
 
 export const WHO_AM_I = `${pkg.name.split('/')[1]} v${pkg.version}`;
 export const WEBSITE = pkg.website;
@@ -32,7 +33,7 @@ export function generateRandomString(length: number) {
 }
 
 // ! secret store (if someone knows if this is terrible practice please tell me)
-await ensureDir('data/uploads');
+await mkdir('data/uploads', { recursive: true })
 await Bun.write(join('data/.secret'), crypto.getRandomValues(new Uint32Array(16)).join(''));
 export async function SECRET() {
 	return await Bun.file(join('data/.secret')).text();

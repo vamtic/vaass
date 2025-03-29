@@ -12,6 +12,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@std/encoding": "npm:@jsr/std__encoding",
     "@std/ulid": "npm:@jsr/std__ulid",
     "@tailwindcss/postcss": "^4.0.17",
     "@tycrek/log": "^1.2.0",

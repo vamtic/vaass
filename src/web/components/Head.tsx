@@ -1,5 +1,5 @@
 import { StylesLink } from './Styles.tsx';
-import type { PropsWithChildren } from '@hono/hono/jsx';
+import type { PropsWithChildren } from 'hono/jsx';
 
 export default ({ title, children }: PropsWithChildren<{ title: string }>) => (
 	<head>

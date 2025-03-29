@@ -1,6 +1,6 @@
 import type { Upload } from './Upload.ts';
 
-declare module '@hono/hono' {
+declare module 'hono' {
 	interface ContextRenderer {
 		(data: {
 			upload: Upload;

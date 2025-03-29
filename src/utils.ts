@@ -20,7 +20,7 @@ export const isDocker = await exists('/.dockerenv');
 /**
  * Path joiner
  */
-export const join = (...args: string[]) => path.join(Deno.cwd(), ...args);
+export const join = (...args: string[]) => path.join(process.cwd(), ...args);
 
 export function generateRandomString(length: number) {
 	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -33,7 +33,7 @@ export function generateRandomString(length: number) {
 
 // ! secret store (if someone knows if this is terrible practice please tell me)
 await ensureDir('data/uploads');
-await Deno.writeTextFile(join('data/.secret'), crypto.getRandomValues(new Uint32Array(16)).join(''));
+await Bun.write(join('data/.secret'), crypto.getRandomValues(new Uint32Array(16)).join(''));
 export async function SECRET() {
-	return await Deno.readTextFile(join('data/.secret'));
+	return await Bun.file(join('data/.secret')).text();
 }

@@ -3,7 +3,6 @@ import { setCookie } from 'hono/cookie';
 import { sign } from 'hono/jwt';
 import { DB } from '../../database/db.ts';
 import { join, log, SECRET } from '../../utils.ts';
-import { verify } from '../password.ts';
 import LoginRegister from '../pages/LoginRegister.tsx';
 import type { JWTPayload } from '../../types/JWTPayload.ts';
 
@@ -36,7 +35,7 @@ route.post('/', async (ctx) => {
 
 	const user = DB.getUser(form.username);
 	if (user == null) return ctx.html(LoginRegister('login', 'Invalid username'));
-	if (!verify(form.password, user.passhash)) return ctx.html(LoginRegister('login', 'Invalid password'));
+	if (!await Bun.password.verify(form.password, user.passhash)) return ctx.html(LoginRegister('login', 'Invalid password'));
 
 	setCookie(ctx, 'yaass', await jwt(user.uid, Math.floor(Date.now() / 1000)), { secure: ctx.get('domain').startsWith('https') });
 	log.info(`user authenticated [${user.username}] [${user.uid}]`);

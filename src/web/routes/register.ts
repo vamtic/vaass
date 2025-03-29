@@ -3,7 +3,6 @@ import { Hono } from 'hono';
 // import { deleteCookie, getCookie, getSignedCookie, setCookie, setSignedCookie } from '@hono/hono/cookie';
 import { log } from '../../utils.ts';
 import { DB } from '../../database/db.ts';
-import { hash } from '../password.ts';
 import LoginRegister from '../pages/LoginRegister.tsx';
 import type { User } from '../../types/User.ts';
 
@@ -24,7 +23,7 @@ route.post('/', async (ctx) => {
 		uid: ulid(),
 		name: form.username[0]!.toUpperCase() + form.username.substring(1),
 		username: form.username,
-		passhash: hash(form.password),
+		passhash: await Bun.password.hash(form.password),
 		tokens: '',
 		owner: DB.getUsers().length === 0,
 		meta: JSON.stringify({}),

@@ -1,4 +1,4 @@
-import { Database } from '@db/sqlite';
+import { Database } from 'bun:sqlite';
 import { log } from '../utils.ts';
 import type { Upload } from '../types/Upload.ts';
 import type { User } from '../types/User.ts';
@@ -8,7 +8,7 @@ const database = new Database('data/yaass.db');
 
 export const DB = {
 	init: () => {
-		const [version] = database.prepare('select sqlite_version();').value<[string]>()!;
+		const [version] = database.prepare('select sqlite_version();').values()!;
 
 		// Create users table
 		database.prepare(
@@ -59,10 +59,10 @@ export const DB = {
 			image.uploader_uid,
 		),
 
-	getUpload: (needle: string) => database.prepare(`SELECT * FROM uploads WHERE uid = ? OR sid = ?;`).get<Upload>(needle, needle),
+	getUpload: (needle: string) => database.prepare(`SELECT * FROM uploads WHERE uid = ? OR sid = ?;`).get(needle, needle) as Upload,
 
 	getUploads: (needle: string) =>
-		database.prepare(`SELECT * FROM uploads WHERE uploader_uid = ? OR filehash = ?;`).all<Upload>(needle, needle),
+		database.prepare(`SELECT * FROM uploads WHERE uploader_uid = ? OR filehash = ?;`).all(needle, needle) as Upload[],
 
 	createUser: (user: User) =>
 		database.prepare(`
@@ -77,11 +77,11 @@ export const DB = {
 			user.meta,
 		),
 
-	getUser: (needle: string) => database.prepare(`SELECT * FROM users WHERE uid = ? OR username = ?;`).get<User>(needle, needle),
+	getUser: (needle: string) => database.prepare(`SELECT * FROM users WHERE uid = ? OR username = ?;`).get(needle, needle) as User,
 
-	getUserByToken: (token: string) => database.prepare(`SELECT * FROM users WHERE ',' || tokens || ',' LIKE ?;`).get<User>(`%,${token},%`),
+	getUserByToken: (token: string) => database.prepare(`SELECT * FROM users WHERE ',' || tokens || ',' LIKE ?;`).get(`%,${token},%`) as User,
 
-	getUsers: () => database.prepare(`SELECT * FROM USERS;`).all<User>(),
+	getUsers: () => database.prepare(`SELECT * FROM USERS;`).all() as User[],
 
 	debug: () => {
 		log.debug('database details');

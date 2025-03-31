@@ -1,6 +1,5 @@
 import pkg from '../package.json';
 import * as path from 'node:path';
-// todo: dont use fs extra
 import crypto from 'node:crypto';
 import Log from '@tycrek/log';
 import { mkdir } from 'node:fs/promises';

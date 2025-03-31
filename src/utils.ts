@@ -33,7 +33,7 @@ export function generateRandomString(length: number) {
 }
 
 // ! secret store (if someone knows if this is terrible practice please tell me)
-await mkdir('data/uploads', { recursive: true })
+await mkdir('data/uploads', { recursive: true });
 await Bun.write(join('data/.secret'), crypto.getRandomValues(new Uint32Array(16)).join(''));
 export async function SECRET() {
 	return await Bun.file(join('data/.secret')).text();

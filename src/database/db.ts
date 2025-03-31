@@ -79,7 +79,8 @@ export const DB = {
 
 	getUser: (needle: string) => database.prepare(`SELECT * FROM users WHERE uid = ? OR username = ?;`).get(needle, needle) as User,
 
-	getUserByToken: (token: string) => database.prepare(`SELECT * FROM users WHERE ',' || tokens || ',' LIKE ?;`).get(`%,${token},%`) as User,
+	getUserByToken: (token: string) =>
+		database.prepare(`SELECT * FROM users WHERE ',' || tokens || ',' LIKE ?;`).get(`%,${token},%`) as User,
 
 	getUsers: () => database.prepare(`SELECT * FROM USERS;`).all() as User[],
 

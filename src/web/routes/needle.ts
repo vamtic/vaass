@@ -25,7 +25,7 @@ route.get('/:needle/:disposition?', async (ctx) => {
 		ctx.header('Accept-Ranges', 'bytes');
 
 		// todo: potentially re-optimize?
-		return ctx.body(await Bun.file(upload.location).arrayBuffer())
+		return ctx.body(await Bun.file(upload.location).arrayBuffer());
 		/*return honostream(ctx, async (stream) => {
 			stream.onAbort(() => log.warn(`stream aborted!`));
 

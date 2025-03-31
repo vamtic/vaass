@@ -6,7 +6,7 @@ services:
       - ./data:/yaass/data
     ports:
       - '6969:6969'
-    network_mode: "host"
+    network_mode: "host" # ! this is a workaround for a Bun bug
     deploy:
       resources:
         limits:

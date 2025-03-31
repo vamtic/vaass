@@ -6,7 +6,8 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"format": "deno fmt --watch",
+		"fmt": "deno fmt",
+		"dev": "bun run --watch src/yaass.ts",
 		"start": "bun run src/yaass.ts"
 	},
 	"devDependencies": {

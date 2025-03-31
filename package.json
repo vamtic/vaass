@@ -1,24 +1,28 @@
 {
-  "name": "yaass",
-  "version": "0.0.0-c598c0e",
-  "website": "https://github.com/tycrek/yaass",
-  "module": "src/yaass.ts",
-  "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@std/encoding": "npm:@jsr/std__encoding",
-    "@std/ulid": "npm:@jsr/std__ulid",
-    "@tailwindcss/postcss": "^4.0.17",
-    "@tycrek/log": "^1.2.0",
-    "cssnano": "^7.0.6",
-    "hono": "^4.7.5",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.0.17"
-  }
+	"name": "yaass",
+	"version": "0.0.0-c598c0e",
+	"website": "https://github.com/tycrek/yaass",
+	"module": "src/yaass.ts",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"format": "deno fmt --watch",
+		"start": "bun run src/yaass.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@std/encoding": "npm:@jsr/std__encoding",
+		"@std/ulid": "npm:@jsr/std__ulid",
+		"@tailwindcss/postcss": "^4.0.17",
+		"@tycrek/log": "^1.2.0",
+		"cssnano": "^7.0.6",
+		"hono": "^4.7.5",
+		"postcss": "^8.5.3",
+		"tailwindcss": "^4.0.17"
+	}
 }

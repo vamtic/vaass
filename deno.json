@@ -1,38 +1,4 @@
 {
-	"name": "@tycrek/yaass",
-	"license": "ISC",
-	"version": "0.0.0-35ddba1a",
-	"website": "https://github.com/tycrek/yaass",
-	"exports": "./src/yaass.ts",
-	"tasks": {
-		"dev-fmt": "deno fmt --watch",
-		"dev-run": "deno run -A --watch ./src/yaass.ts",
-		"start": "deno run -E -N -R -W=data,/deno-dir/ -S=cpus,networkInterfaces,hostname,homedir --allow-run=getconf --allow-ffi ./src/yaass.ts",
-		"rm-data": "rm -drf ./data/",
-		"dev": {
-			"dependencies": ["dev-fmt", "dev-run"]
-		},
-		"clean": {
-			"command": "deno task dev",
-			"dependencies": ["rm-data"]
-		}
-	},
-	"imports": {
-		"@db/sqlite": "jsr:@db/sqlite@^0.12.0",
-		"@hono/hono": "jsr:@hono/hono@^4.6.19",
-		"@std/crypto": "jsr:@std/crypto@^1.0.4",
-		"@std/encoding": "jsr:@std/encoding@^1.0.7",
-		"@std/fs": "jsr:@std/fs@^1.0.11",
-		"@std/path": "jsr:@std/path@^1.0.8",
-		"@std/streams": "jsr:@std/streams@^1.0.9",
-		"@std/ulid": "jsr:@std/ulid@^1.0.0",
-		"@stdext/crypto": "jsr:@stdext/crypto@^0.1.0",
-		"@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.0.6",
-		"@tycrek/log": "jsr:@tycrek/log@^1.0.0",
-		"cssnano": "npm:cssnano@^7.0.6",
-		"postcss": "npm:postcss@^8.5.2",
-		"tailwindcss": "npm:tailwindcss@^4.0.6"
-	},
 	"fmt": {
 		"useTabs": true,
 		"indentWidth": 4,
@@ -40,19 +6,10 @@
 		"singleQuote": true,
 		"lineWidth": 140,
 		"exclude": [
-			"README.md"
+			"README.md",
+			".gitignore",
+			".vscode/",
+			"compose.yml"
 		]
-	},
-	"exclude": [
-		".gitignore",
-		".vscode/",
-		"compose.yml"
-	],
-	"compilerOptions": {
-		"jsx": "precompile",
-		"jsxImportSource": "@hono/hono/jsx",
-		"lib": ["dom", "deno.ns"]
-	},
-	"nodeModulesDir": "auto",
-	"lock": false
+	}
 }

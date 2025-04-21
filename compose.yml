@@ -7,9 +7,4 @@ services:
     ports:
       - '6969:6969'
     network_mode: "host" # ! this is a workaround for a Bun bug
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-        reservations:
-          memory: 256M
+    mem_limit: 1G

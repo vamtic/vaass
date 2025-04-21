@@ -16,6 +16,7 @@ git clone https://github.com/tycrek/yaass.git
 cd yaass/
 
 # If you chose Bun:
+bun install
 bun start
 
 # Or you chose Docker:

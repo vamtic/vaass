@@ -41,7 +41,6 @@ export default () => {
 								))}
 							</tbody>
 						</table>
-						{/* </div> */}
 					</div>
 					<div class='basis-full md:basis-1/2'>
 						<h2 class='text-4xl'>Stats</h2>

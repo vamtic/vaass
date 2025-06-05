@@ -16,7 +16,6 @@ export default () => {
 				<div class='flex flex-col md:flex-row'>
 					<div class='basis-full md:basis-1/2'>
 						<h2 class='text-4xl'>Users</h2>
-						<p class='italic'>No data yet</p>
 						{
 							DB.getUsers().map((user) => (
 								<div class='border border-amber-900 rounded-2xl p-4 my-2'>

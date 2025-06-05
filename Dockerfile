@@ -1,4 +1,4 @@
-FROM oven/bun:1.2.10-alpine
+FROM oven/bun:1.2.15-alpine
 WORKDIR /yaass
 COPY . .
 RUN bun install --production

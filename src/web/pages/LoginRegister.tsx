@@ -1,5 +1,6 @@
 import Head from '../components/Head.tsx';
 import Outlink from '../components/Outlink.tsx';
+import type { PropsWithChildren } from 'hono/jsx';
 
 const Error = (text: string) => (
 	<div class='text-center'>
@@ -7,7 +8,7 @@ const Error = (text: string) => (
 	</div>
 );
 
-export default (mode: 'login' | 'register', error?: string) => {
+export default ({ mode, page, error }: PropsWithChildren<{ mode: 'login' | 'register'; page?: 'dashboard' | 'admin'; error?: string }>) => {
 	return (
 		<html>
 			<Head title={mode == 'login' ? 'Login' : 'Register'}>
@@ -23,7 +24,7 @@ export default (mode: 'login' | 'register', error?: string) => {
 					{error != null ? Error(`${error}`) : ''}
 
 					{/* Login form */}
-					<form class={mode == 'login' ? '' : 'hidden'} id='login' action='/login' method='post'>
+					<form class={mode == 'login' ? '' : 'hidden'} id='login' action={`/login?page=${page ?? 'dashboard'}`} method='post'>
 						<p class='text-xl mt-4'>Username</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
 						<p class='text-xl mt-4'>Password</p>

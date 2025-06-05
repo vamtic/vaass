@@ -21,7 +21,7 @@ async function jwt(uid: string, timestamp: number) {
 
 const route = new Hono();
 
-route.get('/', (ctx) => ctx.html(LoginRegister('login')));
+route.get('/', (ctx) => ctx.html(LoginRegister({ mode: 'login' })));
 
 route.get('/swap.js', async (ctx) => {
 	ctx.header('Content-Type', 'text/javascript');
@@ -30,16 +30,20 @@ route.get('/swap.js', async (ctx) => {
 
 route.post('/', async (ctx) => {
 	const form = await ctx.req.parseBody() as unknown as { username: string; password: string };
-	if (form.username == '') return ctx.html(LoginRegister('login', 'Invalid username'));
-	if (form.password == '') return ctx.html(LoginRegister('login', 'Invalid password'));
+	if (form.username == '') return ctx.html(LoginRegister({ mode: 'login', error: 'Invalid username' }));
+	if (form.password == '') return ctx.html(LoginRegister({ mode: 'login', error: 'Invalid password' }));
+
+	const page = ctx.req.query('page') == 'admin' ? 'admin' : 'dashboard';
 
 	const user = DB.getUser(form.username);
-	if (user == null) return ctx.html(LoginRegister('login', 'Invalid username'));
-	if (!await Bun.password.verify(form.password, user.passhash)) return ctx.html(LoginRegister('login', 'Invalid password'));
+	if (user == null) return ctx.html(LoginRegister({ mode: 'login', page, error: 'Invalid username' }));
+	if (!await Bun.password.verify(form.password, user.passhash)) {
+		return ctx.html(LoginRegister({ mode: 'login', page, error: 'Invalid password' }));
+	}
 
 	setCookie(ctx, 'yaass', await jwt(user.uid, Math.floor(Date.now() / 1000)), { secure: ctx.get('domain').startsWith('https') });
 	log.info(`user authenticated [${user.username}] [${user.uid}]`);
-	return ctx.redirect('/dashboard');
+	return ctx.redirect(`/${page}`);
 });
 
 export default route;

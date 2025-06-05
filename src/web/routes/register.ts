@@ -8,16 +8,16 @@ import type { User } from '../../types/User.ts';
 
 const route = new Hono();
 
-route.get('/', (ctx) => ctx.html(LoginRegister('register')));
+route.get('/', (ctx) => ctx.html(LoginRegister({ mode: 'register' })));
 
 route.post('/', async (ctx) => {
 	const form = await ctx.req.parseBody() as unknown as { username: string; password: string; password2: string };
-	if (form.username == '') return ctx.html(LoginRegister('register', 'Invalid username'));
-	if (form.password == '' || form.password2 == '') return ctx.html(LoginRegister('register', 'Invalid password'));
-	if (form.password !== form.password2) return ctx.html(LoginRegister('register', 'Passwords must match'));
+	if (form.username == '') return ctx.html(LoginRegister({ mode: 'register', error: 'Invalid username' }));
+	if (form.password == '' || form.password2 == '') return ctx.html(LoginRegister({ mode: 'register', error: 'Invalid password' }));
+	if (form.password !== form.password2) return ctx.html(LoginRegister({ mode: 'register', error: 'Passwords must match' }));
 
 	const checkUser = DB.getUser(form.username);
-	if (checkUser != null) return ctx.html(LoginRegister('register', 'Username taken'));
+	if (checkUser != null) return ctx.html(LoginRegister({ mode: 'register', error: 'Username taken' }));
 
 	const newUser: User = {
 		uid: ulid(),

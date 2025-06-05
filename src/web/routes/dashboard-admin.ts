@@ -12,7 +12,13 @@ const route = new Hono();
 
 route.get('/', async (ctx) => {
 	const unauthResponse = () =>
-		ctx.html(LoginRegister({ mode: 'login', page: ctx.req.path === '/admin' || ctx.req.query('page') === 'admin' ? 'admin' : 'dashboard', error: 'You must be logged in' }));
+		ctx.html(
+			LoginRegister({
+				mode: 'login',
+				page: ctx.req.path === '/admin' || ctx.req.query('page') === 'admin' ? 'admin' : 'dashboard',
+				error: 'You must be logged in',
+			}),
+		);
 	const token = getCookie(ctx, 'yaass');
 
 	if (!token) return unauthResponse();

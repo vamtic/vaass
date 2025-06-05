@@ -1,6 +1,6 @@
 {
 	"name": "yaass",
-	"version": "0.0.0-c598c0e",
+	"version": "0.0.0-f739fae",
 	"website": "https://github.com/tycrek/yaass",
 	"module": "src/yaass.ts",
 	"type": "module",

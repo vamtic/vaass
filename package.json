@@ -1,12 +1,11 @@
 {
 	"name": "yaass",
 	"version": "0.0.0-f739fae",
-	"website": "https://github.com/tycrek/yaass",
+	"website": "https://github.com/vamtic/yaass",
 	"module": "src/yaass.ts",
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"fmt": "deno fmt",
 		"dev": "bun run --watch src/yaass.ts",
 		"start": "bun run src/yaass.ts"
 	},

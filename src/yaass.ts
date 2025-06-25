@@ -1,8 +1,8 @@
 import { DB } from './database/db.ts';
-import { isDocker, log } from './utils.ts';
+import { log } from './utils.ts';
 import handler from './web/server.ts';
 
-log.info(`[bun ${Bun.version_with_sha}] [${isDocker ? 'container' : 'native'}]`);
+log.info(`[bun ${Bun.version_with_sha}] [native]`);
 DB.init();
 
 // Host Bun server

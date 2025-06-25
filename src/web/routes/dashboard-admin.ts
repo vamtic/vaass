@@ -16,7 +16,7 @@ route.get('/', async (ctx) => {
 			LoginRegister({
 				mode: 'login',
 				page: ctx.req.path === '/admin' || ctx.req.query('page') === 'admin' ? 'admin' : 'dashboard',
-				error: 'You must be logged in',
+				error: 'Be kell jelentkezned',
 			}),
 		);
 	const token = getCookie(ctx, 'yaass');
@@ -29,13 +29,13 @@ route.get('/', async (ctx) => {
 
 		if (!user) return unauthResponse();
 
-		// todo: improve admin check
+		// todo: admin ellenőrzés javítása
 		if (ctx.req.path === '/admin') return user.owner ? ctx.html(Admin()) : unauthResponse();
 
 		return ctx.html(Dashboard(user));
 	} catch (ex) {
 		const err = ex as { name: string; message: string };
-		log.error(`error: ${err.name}\n${ex}`);
+		log.error(`hiba: ${err.name}\n${ex}`);
 		return unauthResponse();
 	}
 });

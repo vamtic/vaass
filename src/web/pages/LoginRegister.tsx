@@ -11,7 +11,7 @@ const Error = (text: string) => (
 export default ({ mode, page, error }: PropsWithChildren<{ mode: 'login' | 'register'; page?: 'dashboard' | 'admin'; error?: string }>) => {
 	return (
 		<html>
-			<Head title={mode == 'login' ? 'Login' : 'Register'}>
+			<Head title={mode == 'login' ? 'Bejelentkezés' : 'Regisztráció'}>
 				<script src='/login/swap.js' />
 			</Head>
 			<body class='h-full flex flex-center'>
@@ -20,34 +20,34 @@ export default ({ mode, page, error }: PropsWithChildren<{ mode: 'login' | 'regi
 						<img class='mb-4' src='/favicon.png' />
 					</Outlink>
 
-					{/* insert Error element if, one was supplied */}
+					{/* Hibaüzenet megjelenítése, ha van */}
 					{error != null ? Error(`${error}`) : ''}
 
-					{/* Login form */}
+					{/* Bejelentkezési űrlap */}
 					<form class={mode == 'login' ? '' : 'hidden'} id='login' action={`/login?page=${page ?? 'dashboard'}`} method='post'>
-						<p class='text-xl mt-4'>Username</p>
+						<p class='text-xl mt-4'>Felhasználónév</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
-						<p class='text-xl mt-4'>Password</p>
+						<p class='text-xl mt-4'>Jelszó</p>
 						<input name='password' type='password' class='input-text'></input>
 						<div class='flex justify-around mt-4 gap-4 px-2'>
-							<button class='button basis-full font-bold' type='submit'>Login</button>
+							<button class='button basis-full font-bold' type='submit'>Bejelentkezés</button>
 							<button class='button basis-full' type='button' onclick='swap();'>
-								Register
+								Regisztráció
 							</button>
 						</div>
 					</form>
 
-					{/* Register form */}
+					{/* Regisztrációs űrlap */}
 					<form class={mode == 'register' ? '' : 'hidden'} id='register' action='/register' method='post'>
-						<p class='text-xl mt-4'>Username</p>
+						<p class='text-xl mt-4'>Felhasználónév</p>
 						<input name='username' type='text' autofocus class='input-text'></input>
-						<p class='text-xl mt-4'>Password</p>
+						<p class='text-xl mt-4'>Jelszó</p>
 						<input name='password' type='password' class='input-text'></input>
-						<p class='text-xl mt-4'>Confirm Password</p>
+						<p class='text-xl mt-4'>Jelszó megerősítése</p>
 						<input name='password2' type='password' class='input-text'></input>
 						<div class='flex justify-around mt-4 gap-4 px-2'>
-							<button class='button basis-full' type='button' onclick='swap();'>Login</button>
-							<button class='button basis-full font-bold' type='submit'>Register</button>
+							<button class='button basis-full' type='button' onclick='swap();'>Bejelentkezés</button>
+							<button class='button basis-full font-bold' type='submit'>Regisztráció</button>
 						</div>
 					</form>
 

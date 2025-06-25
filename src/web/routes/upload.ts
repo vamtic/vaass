@@ -10,7 +10,7 @@ const generateShortId = async (options: {
 	size: number;
 	gfySize?: number;
 }) => {
-	// todo: optimize
+	// todo: optimalizálás
 	if (options.method == 'gfycat') {
 		const sz = options.gfySize ? options.gfySize : 2;
 		const getWord = (list: string[], delim = '') => list[Math.floor(Math.random() * list.length)]!.concat(delim);
@@ -31,34 +31,33 @@ const generateShortId = async (options: {
 const route = new Hono();
 
 route.post('/', async (ctx) => {
-	// ! check authorization (! WILL BE CHANGED EVENTUALLY !)
+	// ! hitelesítés ellenőrzése (! MEGVÁLTOZTATÁSRA KERÜL !)
 	const secretFile = join('data/.authorization');
 	if (await Bun.file(secretFile).exists()) {
 		const secret = (await Bun.file(secretFile).text()).trim();
-		if (!ctx.req.header('Authorization')) return ctx.text('Unauthorized', 401);
-		else if (ctx.req.header('Authorization') !== secret) return ctx.text('Forbidden', 403);
+		if (!ctx.req.header('Authorization')) return ctx.text('Jogosulatlan', 401);
+		else if (ctx.req.header('Authorization') !== secret) return ctx.text('Tiltott', 403);
 	}
 
 	const body = await ctx.req.formData();
 
 	if (!body.has('file')) {
 		ctx.status(400);
-		return ctx.text('file parameter missing');
+		return ctx.text('Hiányzó fájl paraméter');
 	}
 
-	// Get file from body
+	// Fájl kinyerése a kérésből
 	const file = body.get('file') as File;
 
-	// File details
+	// Fájl adatai
 	const uid = ulid();
 	const nameOnDisk = `${uid}.${file.name.includes('.') ? file.name.split('.').pop() : 'unknown'}`;
 	const location = 'data/uploads/' + nameOnDisk;
-	// const stream = file.stream();
 
-	// Save file to disk
+	// Fájl mentése a lemezre
 	await Bun.write(join(location), await file.bytes());
 
-	// Save details to database
+	// Adatok mentése az adatbázisba
 	const upload: Upload = {
 		uid,
 		sid: await generateShortId({
@@ -75,7 +74,7 @@ route.post('/', async (ctx) => {
 	};
 	DB.putUpload(upload);
 
-	log.info(`uploaded: ${upload.sid} [${upload.type}] [${upload.filename}] [${uid}]`);
+	log.info(`feltöltve: ${upload.sid} [${upload.type}] [${upload.filename}] [${uid}]`);
 
 	return ctx.json({ url: `${ctx.get('domain')}/${upload.sid}`, sid: upload.sid });
 });

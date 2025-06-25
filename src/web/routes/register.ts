@@ -12,12 +12,12 @@ route.get('/', (ctx) => ctx.html(LoginRegister({ mode: 'register' })));
 
 route.post('/', async (ctx) => {
 	const form = await ctx.req.parseBody() as unknown as { username: string; password: string; password2: string };
-	if (form.username == '') return ctx.html(LoginRegister({ mode: 'register', error: 'Invalid username' }));
-	if (form.password == '' || form.password2 == '') return ctx.html(LoginRegister({ mode: 'register', error: 'Invalid password' }));
-	if (form.password !== form.password2) return ctx.html(LoginRegister({ mode: 'register', error: 'Passwords must match' }));
+	if (form.username == '') return ctx.html(LoginRegister({ mode: 'register', error: 'Érvénytelen felhasználónév' }));
+	if (form.password == '' || form.password2 == '') return ctx.html(LoginRegister({ mode: 'register', error: 'Érvénytelen jelszó' }));
+	if (form.password !== form.password2) return ctx.html(LoginRegister({ mode: 'register', error: 'A jelszavaknak egyezniük kell' }));
 
 	const checkUser = DB.getUser(form.username);
-	if (checkUser != null) return ctx.html(LoginRegister({ mode: 'register', error: 'Username taken' }));
+	if (checkUser != null) return ctx.html(LoginRegister({ mode: 'register', error: 'A felhasználónév foglalt' }));
 
 	const newUser: User = {
 		uid: ulid(),
@@ -30,7 +30,7 @@ route.post('/', async (ctx) => {
 	};
 
 	DB.createUser(newUser);
-	log.success(`user created [${newUser.username}] [${newUser.uid}]`);
+	log.success(`felhasználó létrehozva [${newUser.username}] [${newUser.uid}]`);
 
 	return ctx.redirect('/login');
 });

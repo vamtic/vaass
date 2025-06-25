@@ -15,7 +15,7 @@ export default (upload: Upload, src: string) => {
 				</div>
 				<Media />
 				<p class='italic'>
-					Hosted by <a target='_blank' href={WEBSITE} class='font-bold hover:underline'>{WHO_AM_I}</a>
+					Üzemeltető: <a target='_blank' href={WEBSITE} class='font-bold hover:underline'>{WHO_AM_I}</a>
 				</p>
 			</body>
 		</html>

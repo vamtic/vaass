@@ -5,10 +5,10 @@ import type { User } from '../../types/User.ts';
 export default (user: User) => {
 	return (
 		<html>
-			<Head title='Dashboard' />
+			<Head title='Vezérlőpult' />
 			<body class='h-full flex flex-row'>
-				<h1 class='font-bold text-7xl'>Welcome, {user.name}</h1>
-				<h2 class='italic font-4xl'>Dashboard is a work in progress.</h2>
+				<h1 class='font-bold text-7xl'>Üdvözöljük, {user.name}</h1>
+				<h2 class='italic font-4xl'>A vezérlőpult jelenleg fejlesztés alatt áll.</h2>
 			</body>
 		</html>
 	);

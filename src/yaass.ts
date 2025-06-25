@@ -11,4 +11,4 @@ Bun.serve({
 	fetch: handler,
 });
 
-log.info(`server started: http://0.0.0.0:6969`);
+log.info(`A szerver elindult: http://0.0.0.0:6969`);

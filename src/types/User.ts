@@ -1,41 +1,41 @@
 export type User = {
 	/**
-	 * SQLite internal identifier
+	 * SQLite belső azonosító
 	 */
 	_id?: string;
 
 	/**
-	 * Unique identifier (ULID format)
+	 * Egyedi azonosító (ULID formátum)
 	 */
 	uid: string;
 
 	/**
-	 * Display name
+	 * Megjelenített név
 	 */
 	name: string;
 
 	/**
-	 * Username, used for sign-in
+	 * Felhasználónév, bejelentkezéshez használt
 	 */
 	username: string;
 
 	/**
-	 * Password hash
+	 * Jelszó hash
 	 */
 	passhash: string;
 
 	/**
-	 * List of upload tokens
+	 * Feltöltési tokenek listája
 	 */
 	tokens: string;
 
 	/**
-	 * Is the user the owner of the server?
+	 * A felhasználó a szerver tulajdonosa?
 	 */
 	owner: boolean;
 
 	/**
-	 * JSON of additional meta details. WIP
+	 * További meta adatok JSON formátumban. Folyamatban lévő munka
 	 */
 	meta: string;
 };

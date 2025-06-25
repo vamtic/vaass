@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		// Environment setup & latest features
+		// Környezet beállítás & legújabb funkciók
 		"lib": ["ESNext", "DOM"],
 		"target": "ESNext",
 		"module": "ESNext",
@@ -9,19 +9,19 @@
 		"jsxImportSource": "hono/jsx",
 		"allowJs": true,
 
-		// Bundler mode
+		// Bundler mód
 		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
 		"verbatimModuleSyntax": true,
 		"noEmit": true,
 
-		// Best practices
+		// Ajánlott gyakorlatok
 		"strict": true,
 		"skipLibCheck": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
 
-		// Some stricter flags (disabled by default)
+		// Néhány szigorúbb beállítás (alapértelmezetten kikapcsolva)
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"noPropertyAccessFromIndexSignature": false

@@ -3,14 +3,14 @@ import { log } from '../utils.ts';
 import type { Upload } from '../types/Upload.ts';
 import type { User } from '../types/User.ts';
 
-// Prepare database on filesystem
+// Adatbázis előkészítése a fájlrendszerben
 const database = new Database('data/yaass.db');
 
 export const DB = {
 	init: () => {
 		const [version] = database.prepare('select sqlite_version();').values()!;
 
-		// Create users table
+		// Felhasználók tábla létrehozása
 		database.prepare(
 			`CREATE TABLE IF NOT EXISTS users (
 			_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,7 +24,7 @@ export const DB = {
 		);`,
 		).run();
 
-		// Create uploads table
+		// Feltöltések tábla létrehozása
 		database.prepare(
 			`CREATE TABLE IF NOT EXISTS uploads (
 			_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,7 +40,7 @@ export const DB = {
 		);`,
 		).run();
 
-		log.info(`using sqlite ${version}`);
+		log.info(`sqlite ${version} használatban`);
 		return;
 	},
 
@@ -85,10 +85,10 @@ export const DB = {
 	getUsers: () => database.prepare(`SELECT * FROM USERS;`).all() as User[],
 
 	debug: () => {
-		log.debug('database details');
-		console.debug(`------------ users ------------`);
+		log.debug('adatbázis részletek');
+		console.debug(`------------ felhasználók ------------`);
 		console.debug(database.prepare(`PRAGMA table_info(users);`).all());
-		console.debug(`------------ uploads ------------`);
+		console.debug(`------------ feltöltések ------------`);
 		console.debug(database.prepare(`PRAGMA table_info(uploads);`).all());
 	},
 };

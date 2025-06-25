@@ -1,7 +1,7 @@
 declare module 'hono' {
 	interface ContextVariableMap {
 		/**
-		 * Domain (and optionally port) the request was called via
+		 * A kérés által használt domain (opcionálisan porttal együtt)
 		 */
 		domain: string;
 	}

@@ -5,7 +5,7 @@ import handler from './web/server.ts';
 log.info(`[bun ${Bun.version_with_sha}] [native]`);
 DB.init();
 
-// Host Bun server
+// Bun szerver indítása
 Bun.serve({
 	port: 6969,
 	fetch: handler,

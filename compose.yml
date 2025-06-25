@@ -6,5 +6,5 @@ services:
       - ./data:/yaass/data
     ports:
       - '6969:6969'
-    network_mode: "host" # ! this is a workaround for a Bun bug
+    network_mode: "host" # ! ez egy átmeneti megoldás egy Bun hibára
     mem_limit: 512M

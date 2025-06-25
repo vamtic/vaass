@@ -1,51 +1,51 @@
 export type Upload = {
 	/**
-	 * SQLite internal identifier
+	 * SQLite belső azonosító
 	 */
 	_id?: number;
 
 	/**
-	 * Unique identifier (ULID format)
+	 * Egyedi azonosító (ULID formátum)
 	 */
 	uid: string;
 
 	/**
-	 * Short identifier
+	 * Rövid azonosító
 	 */
 	sid: string;
 
 	/**
-	 * Original filename
+	 * Eredeti fájlnév
 	 */
 	filename: string;
 
 	/**
-	 * Location on disk relative to yaass root
+	 * Fájl elérési útja a yaass gyökérkönyvtárához képest
 	 */
 	location: string;
 
 	/**
-	 * Unix timestamp of when this file was uploaded
+	 * Unix időbélyeg a feltöltés időpontjáról
 	 */
 	timestamp: number;
 
 	/**
-	 * Hash of the file contents (BLAKE3)
+	 * A fájl tartalmának hash-e (BLAKE3)
 	 */
 	hash: string;
 
 	/**
-	 * Mimetype
+	 * MIME típus
 	 */
 	type: string;
 
 	/**
-	 * Size in bytes
+	 * Méret bájtokban
 	 */
 	size: number;
 
 	/**
-	 * Unique identifier of the user that uploaded this
+	 * A feltöltő felhasználó egyedi azonosítója
 	 */
 	uploader_uid: string;
 };

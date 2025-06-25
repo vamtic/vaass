@@ -8,12 +8,12 @@ export const WHO_AM_I = `${pkg.name} v${pkg.version}`;
 export const WEBSITE = pkg.website;
 
 /**
- * Logger
+ * Naplózó
  */
 export const log = new Log({ prefix: WHO_AM_I, showTimestamps: true, separator: '>' });
 
 /**
- * Path joiner
+ * Útvonal-összeállító
  */
 export const join = (...args: string[]) => path.join(process.cwd(), ...args);
 
@@ -26,7 +26,7 @@ export function generateRandomString(length: number) {
 	return result;
 }
 
-// ! secret store (if someone knows if this is terrible practice please tell me)
+// ! titkos tároló (ha valaki tudja, hogy ez rossz gyakorlat-e, kérem szóljon)
 await mkdir('data/uploads', { recursive: true });
 await Bun.write(join('data/.secret'), crypto.getRandomValues(new Uint32Array(16)).join(''));
 

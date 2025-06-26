@@ -20,7 +20,7 @@ export default ({ mode, page, error }: PropsWithChildren<{ mode: 'login' | 'regi
 						<img class='mb-4 mx-auto' src='/favicon.png' />
 					</Outlink>
 
-					{/* Display error message if provided */}
+					{/* insert Error element if, one was supplied */}
 					{error != null ? Error(`${error}`) : ''}
 
 					{/* Login form */}
